@@ -374,6 +374,74 @@ td.okw { font-weight: 700; color: var(--ink); }
 .linkbtn .d b { color: #fff !important; text-decoration: underline; text-underline-offset: 3px; }
 .linkbtn .go { flex: none; font-size: 13px; font-weight: 700; color: var(--pink); background: #fff; border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
 
+/* ---------- 図解 ---------- */
+.fig { border: 1px solid var(--line); border-radius: 10px; background: var(--bg); padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 14px; }
+.fig-t { font-family: var(--maru); font-size: 14.5px; font-weight: 700; color: var(--pink); letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
+.fig-t::before { content: ""; width: 4px; height: 1.1em; background: var(--pink); border-radius: 2px; }
+.fig-n { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+/* 返信のタイミング */
+.lanes { display: flex; flex-direction: column; gap: 12px; }
+.lane { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; }
+.lane .who { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.lane .who small { display: block; font-weight: 500; font-size: 11.5px; color: var(--muted); }
+.track { display: flex; align-items: stretch; min-width: 0; border-radius: 8px; overflow: hidden; font-size: 12.5px; line-height: 1.5; }
+.track > span { padding: 8px 10px; display: flex; align-items: center; min-width: 0; }
+.track .in { background: var(--tint-bl); color: var(--blue); font-weight: 700; flex: none; }
+.track .wait { background: var(--surface); color: var(--muted); flex: 1.2; background-image: repeating-linear-gradient(135deg, transparent 0 6px, rgba(0,0,0,.035) 6px 12px); }
+.track .go { background: var(--pink); color: #fff; font-weight: 700; flex: 2; }
+.track .ok { background: var(--tint-pk); color: var(--pink); font-weight: 700; flex: 1; justify-content: center; text-align: center; }
+/* 1時間枠 */
+.slot { display: grid; grid-template-columns: 40fr 20fr; border-radius: 10px; overflow: hidden; }
+.slot > div { padding: 12px 12px 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.slot .les { background: var(--tint-pk); }
+.slot .rec { background: var(--tint-bl); }
+.slot .hd { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 700; color: var(--ink); flex-wrap: wrap; }
+.slot .hd b { font-family: var(--en); color: var(--pink); font-size: 18px; line-height: 1; }
+.slot .rec .hd b { color: var(--blue); }
+.slot ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+.slot li { background: var(--bg); border-radius: 6px; padding: 6px 6px 5px; font-size: 11.5px; line-height: 1.45; color: var(--txt); text-align: center; }
+.slot li.hl { background: var(--pink); color: #fff; font-weight: 700; }
+.slot .rec p { font-size: 12px; line-height: 1.6; color: var(--txt); }
+.ruler { display: grid; grid-template-columns: 40fr 20fr; font-family: var(--en); font-size: 11px; color: var(--muted); margin-top: -8px; }
+.ruler span:last-child { display: flex; justify-content: space-between; }
+/* シートを使う時期 */
+.cal { overflow-x: auto; }
+.cal table { min-width: 560px; font-size: 12.5px; }
+.cal th, .cal td { padding: 8px 6px; text-align: center; vertical-align: middle; }
+.cal th:first-child, .cal td:first-child { text-align: left; white-space: nowrap; padding-left: 12px; font-weight: 700; color: var(--ink); }
+.cal td.on::before { content: ""; display: block; height: 14px; border-radius: 7px; background: var(--pink-soft); }
+.cal td.on.k::before { background: var(--pink); }
+.cal td.on.s { position: relative; }
+.cal td.lbl { font-size: 11px; color: var(--muted); }
+/* ランクの階段 */
+.stairs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: start; }
+.stair { display: grid; grid-template-rows: 176px auto auto; gap: 6px; min-width: 0; }
+.stair .bar { align-self: end; border-bottom: 3px solid var(--pink-soft); border-radius: 8px 8px 0 0; background: var(--tint-pk); display: flex; flex-direction: column; justify-content: flex-end; padding: 8px 6px; text-align: center; }
+.stair .bar b { font-family: var(--en); font-size: 20px; color: var(--pink); line-height: 1.1; }
+.stair .bar small { font-size: 11px; color: var(--muted); }
+.stair:nth-child(1) .bar { height: 64px; }
+.stair:nth-child(2) .bar { height: 92px; }
+.stair:nth-child(3) .bar { height: 120px; }
+.stair:nth-child(4) .bar { height: 148px; }
+.stair:nth-child(5) .bar { height: 176px; background: var(--pink); }
+.stair:nth-child(5) .bar b, .stair:nth-child(5) .bar small { color: #fff; }
+.stair p { font-size: 11.5px; color: var(--txt); line-height: 1.55; }
+.stair .nm { font-size: 12px; font-weight: 700; color: var(--ink); }
+
+.stairs-note { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+/* 成果ボーナスの道のり */
+.road { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; padding-top: 6px; }
+.road::before { content: ""; position: absolute; left: 16px; right: 16px; top: 22px; height: 3px; background: linear-gradient(90deg, var(--pink-soft), var(--pink)); border-radius: 2px; }
+.road .pt { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 4px; }
+.road .dot { width: 34px; height: 34px; border-radius: 50%; background: var(--bg); border: 3px solid var(--pink); display: grid; place-items: center; font: 700 11px var(--en); color: var(--pink); }
+.road .pt:last-child .dot { background: var(--pink); color: #fff; }
+.road .lb { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.road .yen { font-family: var(--en); font-size: 20px; font-weight: 700; color: var(--pink); line-height: 1.1; }
+.road .yen small { font-family: var(--jp); font-size: 11px; color: var(--ink); }
+.extra { display: flex; align-items: center; gap: 12px; background: var(--tint-pk); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+.extra b.yen { font-family: var(--en); font-size: 20px; color: var(--pink); margin-left: auto; white-space: nowrap; }
+.flow.f3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
 .note { font-size: 13px; color: var(--muted); background: var(--surface); border-radius: 10px; padding: 12px 16px; line-height: 1.8; }
 .note b { color: var(--ink); }
 
@@ -413,6 +481,19 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
   .flow .st { margin-right: 0; }
   .flow .st:not(:last-child)::after { right: auto; left: 24px; top: auto; bottom: -14px; transform: rotate(135deg); }
   .mo { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .flow.f3 { grid-template-columns: minmax(0, 1fr); }
+  .lane { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .slot ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stairs { gap: 4px; }
+  .stair { grid-template-rows: 150px auto; }
+  .stair:nth-child(5) .bar { height: 150px; }
+  .stair:nth-child(4) .bar { height: 126px; }
+  .stair:nth-child(3) .bar { height: 102px; }
+  .stair:nth-child(2) .bar { height: 80px; }
+  .stair:nth-child(1) .bar { height: 60px; }
+  .stair .bar b { font-size: 15px; }
+  .stair p { display: none; }
+  .road .lb { font-size: 11.5px; }
   .art { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .part-head .pl { font-size: 34px; }
   .pr { padding: 20px 18px; }
@@ -608,6 +689,14 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="numc"><span class="lb">講師定例</span><span class="v">週<span class="en">1</span><small>回・必須</small></span><span class="d">講師同士のミーティング</span></div>
           <div class="numc"><span class="lb">担当人数の目安</span><span class="v"><span class="en">10–15</span><small>名</small></span><span class="d">講師1人あたり</span></div>
         </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：チャットの返信はいつまで？</figcaption>
+          <div class="lanes">
+            <div class="lane"><span class="who">日中に届いた<small>例：13時に質問</small></span><div class="track"><span class="in">届く</span><span class="go">ここから6時間以内に返信</span><span class="ok">19時までに</span></div></div>
+            <div class="lane"><span class="who">夜・休日に届いた<small>例：23時に質問</small></span><div class="track"><span class="in">届く</span><span class="wait">夜の間は待ってよい</span><span class="go">翌朝から6時間以内</span></div></div>
+          </div>
+          <p class="fig-n">受講生さんには「24時間以内に返信します」と案内しています。講師は6時間を守ることで、24時間の約束を必ず守れます。「朝」が何時からかは<span class="tag tbd" style="margin-left:2px">要確認</span></p>
+        </figure>
         <div class="arts">
           <div class="art"><span class="an">第1条</span><div class="ab"><p>受講生さんとの連絡はLINEで行う。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第2条</span><div class="ab"><p>チャットの質問には6時間以内に返信する。受講生さんには「24時間以内に返信します」と案内する。<span class="tag must">必須</span></p><p class="nt">講師の基準を短くしておくことで、受講生さんに約束した24時間を必ず守れるようにしています。</p></div></div>
@@ -712,6 +801,18 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
 
       <section class="ch" id="ch9">
         <div class="ch-head"><span class="no">CHAPTER 09</span><h3>週1回の個別ミーティング</h3><p class="sum">Google Meetで1コマ40分。予定は1時間枠で組み、レッスン後の15〜20分は録画の格納などの作業に使います。毎回この順番で進めます。</p></div>
+
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：1回のレッスンは「1時間枠」</figcaption>
+          <div class="slot">
+            <div class="les"><div class="hd"><span>レッスン</span><b>40<small style="font-size:11px">分</small></b></div>
+              <ol><li>① 先週のタスク確認</li><li class="hl">② 悩み・現状を聞く</li><li>③ 課題のフィードバック</li><li>④ 次のタスクを書く</li></ol></div>
+            <div class="rec"><div class="hd"><span>作業</span><b>15〜20<small style="font-size:11px">分</small></b></div>
+              <p><b>録画をすぐ格納</b>。そのほかの作業もここで</p></div>
+          </div>
+          <div class="ruler"><span>0分</span><span><span>40分</span><span>60分</span></span></div>
+          <p class="fig-n">録画が格納されていないレッスンは報酬の対象外です（第17章 第2条）。終わったらすぐ格納します。</p>
+        </figure>
         <div class="steps">
           <div class="step"><span class="sn en">1</span><h4>先週のタスクの確認</h4><p>タスク管理シートを一緒に見て、できたものにチェックを入れる。</p></div>
           <div class="step hl"><span class="sn en">2</span><h4>今の悩み・現状を聞く</h4><p>受講生さん本人の口から話してもらう時間をとる。</p></div>
@@ -737,6 +838,22 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="sheet"><h4><i></i>振り返りシート</h4><dl><dt>目的</dt><dd>目標に対して、今どこにいるかを確認する</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>毎月</dd></dl></div>
           <div class="sheet"><h4><i></i>台本添削シート</h4><dl><dt>目的</dt><dd>投稿の台本を添削する</dd><dt>書く人</dt><dd>受講生さんが台本を書き、<b>講師が添削する</b></dd><dt>使い方</dt><dd>講師に添削してほしい台本は、このシートに書いてもらう。講師はこのシートを見て添削する（第11章）</dd></dl></div>
         </div>
+        <figure class="fig cal" style="margin:0">
+          <figcaption class="fig-t">図：どのシートを、いつ使う？</figcaption>
+          <div class="tbl">
+          <table>
+            <thead><tr><th>シート</th><th>1週目</th><th>2週目</th><th>3週目</th><th>4週目</th><th>2ヶ月目〜</th><th>中間の見直し</th><th>卒業</th></tr></thead>
+            <tbody>
+              <tr><td>タスク管理</td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td></tr>
+              <tr><td>目標設定</td><td class="on"></td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td></tr>
+              <tr><td>コンセプトワーク設計</td><td></td><td></td><td class="on"></td><td class="on"></td><td></td><td></td><td></td></tr>
+              <tr><td>振り返り</td><td></td><td></td><td></td><td></td><td class="lbl">毎月</td><td class="on"></td><td class="on"></td></tr>
+              <tr><td>台本添削</td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td><td></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="fig-n">濃い色のタスク管理シートは、毎週の個別ミーティングで講師が必ず書きます。台本添削シートは、投稿を始める2ヶ月目からを目安にしています。<span class="tag tbd" style="margin-left:2px">要確認</span></p>
+        </figure>
       </section>
 
       <section class="ch" id="ch11">
@@ -780,6 +897,24 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="sign"><h4>メッセージが短くなった・元気がない</h4><p>「最近がんばりすぎていませんか？次のミーティングで、今の気持ちも聞かせてくださいね」</p></div>
         </div>
         <p class="note">サインは講師定例で気づいたものを足していきます。サインに気づいて声をかけても変わらないときは、講師責任者に共有します（第6章）。</p>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：気づいてから、声をかけるまで</figcaption>
+          <div class="flow">
+            <div class="st"><span class="who">サインに気づく</span><span class="what">返信が遅い、タスクが止まった、元気がない など</span></div>
+            <div class="st hl"><span class="who">講師から声をかける</span><span class="what">課題の催促ではなく、様子を気遣う</span></div>
+            <div class="st"><span class="who">2週間連絡がない</span><span class="what">必ず、気遣う連絡を講師から送る（第1条）</span></div>
+            <div class="st"><span class="who">変わらない</span><span class="what">講師責任者に共有する（第6章）</span></div>
+          </div>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：休会の流れ</figcaption>
+          <div class="flow">
+            <div class="st"><span class="who">受講生さんが申し込む</span><span class="what">公式LINEのリッチメニューのフォームから。期間は本人が決める</span></div>
+            <div class="st"><span class="who">休会中</span><span class="what">講師からは無理に連絡しない</span></div>
+            <div class="st hl"><span class="who">期間が終わる</span><span class="what">できる限りそのタイミングで、講師からLINEで声をかける</span></div>
+            <div class="st"><span class="who">返事がない</span><span class="what">何回・いつまで声をかけるか <span class="tag tbd" style="margin-left:0">要確認</span></span></div>
+          </div>
+        </figure>
         <div class="arts">
           <div class="art"><span class="an">第1条</span><div class="ab"><p>受講生さんからの連絡が<b>2週間</b>途絶えたら、課題の催促ではなく、様子を気遣う連絡を講師から送る。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第2条</span><div class="ab"><p>家庭や体調の事情で動けないときは、まず気遣う。課題の話はしない。再開の目安だけ一緒に決める。<span class="tag must">必須</span></p></div></div>
@@ -877,6 +1012,17 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
             </tbody>
           </table>
         </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：レッスン単価のランク</figcaption>
+          <div class="stairs">
+            <div class="stair"><div class="bar"><b>750</b><small>円</small></div><span class="nm">見習い</span><p>3ヶ月。担当を少しずつ増やす</p></div>
+            <div class="stair"><div class="bar"><b>1,000</b><small>円</small></div><span class="nm">ひとり立ち</span><p>一人で担当を持てる</p></div>
+            <div class="stair"><div class="bar"><b>1,250</b><small>円</small></div><span class="nm">成果</span><p>成果を出した受講生さんがいる</p></div>
+            <div class="stair"><div class="bar"><b>1,500</b><small>円</small></div><span class="nm">難しいケース</span><p>伸び悩みを任せられる</p></div>
+            <div class="stair"><div class="bar"><b>2,000</b><small>円</small></div><span class="nm">育てる側</span><p>ノウハウを他の講師に移せる</p></div>
+          </div>
+          <div class="stairs-note"><span>1コマ（40分）あたり</span><span>3ヶ月に1回査定（第7条）</span></div>
+        </figure>
         <div class="tbl">
           <table>
             <thead><tr><th>1コマの単価</th><th>ランクの目安</th></tr></thead>
@@ -902,6 +1048,16 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
 
       <section class="ch" id="ch17">
         <div class="ch-head"><span class="no">CHAPTER 18</span><h3>成果ボーナス</h3><p class="sum">受講生さんの成果を、講師の報酬にも反映します。講師責任者が証拠を確認してから支払います。</p></div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：受講生さんの成果と、講師へのボーナス</figcaption>
+          <div class="road">
+            <div class="pt"><span class="dot">1K</span><span class="lb">フォロワー1,000人</span><span class="yen">2,000<small>円</small></span></div>
+            <div class="pt"><span class="dot">5K</span><span class="lb">フォロワー5,000人</span><span class="yen">3,000<small>円</small></span></div>
+            <div class="pt"><span class="dot">1万</span><span class="lb">フォロワー1万人</span><span class="yen">5,000<small>円</small></span></div>
+          </div>
+          <div class="extra"><span>＋ 別枠</span><b>初売上（SNS経由で1万円以上）</b><b class="yen">5,000<small style="font-size:11px">円</small></b></div>
+          <p class="fig-n">受講期間中の達成だけが対象。受講生さん1人につき、各項目1回までです。</p>
+        </figure>
         <div class="tbl">
           <table>
             <thead><tr><th>受講生さんの成果</th><th>講師へのボーナス</th></tr></thead>
