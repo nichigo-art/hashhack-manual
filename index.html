@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>HASH HACK 講師マニュアル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&family=Pacifico&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<style>
+/* Layout: 左に目次（部→章）、右に本文。各章は「条」のカードで読む。配色はくすみピンク（モーヴ）×グレージュ */
+:root {
+  --page: #f7f4f5;
+  --bg: #ffffff;
+  --surface: #f7f4f5;
+  --tint-pk: #f3eced;
+  --tint-bl: #eef4f7;
+  --ink: #3a3035;
+  --txt: #4a4246;
+  --muted: #7a6e73;
+  --line: #ebe4e6;
+  --pink: #986677;
+  --pink-soft: #b5a0a8;
+  --blue: #4c95b2;
+  --navy: #3a3035;
+  --bar: #3a3035;
+  --warn-bg: #fdf3e2;
+  --warn-fg: #8a5a12;
+  --ok: #3f8a6b;
+  --grad: linear-gradient(90deg, #b5a0a8 0%, #986677 100%);
+  --shadow: 0 1px 2px rgba(31,45,50,.04), 0 6px 24px rgba(31,45,50,.06);
+  --jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --en: "Josefin Sans", "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --maru: "Zen Maru Gothic", "Noto Sans JP", "Hiragino Maru Gothic ProN", sans-serif;
+  --script: "Pacifico", cursive;
+  --logo-light: block;
+  --logo-dark: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #151214; --bg: #1d191b; --surface: #252023; --tint-pk: #2e2529; --tint-bl: #1a272d;
+    --ink: #f3eef0; --txt: #ddd5d8; --muted: #b0a3a9; --line: #352e31;
+    --pink: #d4a5b5; --pink-soft: #8f7a83; --blue: #86c2d8; --navy: #f3eef0; --bar: #0f0c0e;
+    --warn-bg: #3a2e18; --warn-fg: #f0c97c; --ok: #7cc8a5;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.25);
+    --logo-light: none; --logo-dark: block;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #151214; --bg: #1d191b; --surface: #252023; --tint-pk: #2e2529; --tint-bl: #1a272d;
+  --ink: #f3eef0; --txt: #ddd5d8; --muted: #b0a3a9; --line: #352e31;
+  --pink: #d4a5b5; --pink-soft: #8f7a83; --blue: #86c2d8; --navy: #f3eef0; --bar: #0f0c0e;
+  --warn-bg: #3a2e18; --warn-fg: #f0c97c; --ok: #7cc8a5;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.25);
+  --logo-light: none; --logo-dark: block;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--page); color: var(--txt); font-family: var(--jp);
+  font-size: 15.5px; line-height: 1.9; letter-spacing: .03em;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--page); }
+a { color: inherit; }
+h1, h2, h3, h4 { color: var(--ink); text-wrap: balance; margin: 0; line-height: 1.45; letter-spacing: .06em; }
+p { margin: 0; }
+.en { font-family: var(--en); }
+b, strong { color: var(--ink); font-weight: 700; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+
+/* ---------- ヘッダー ---------- */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--page) 92%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top::before { content: ""; display: block; height: 4px; background: var(--grad); }
+.top-in {
+  display: flex; align-items: center; gap: 14px; height: 60px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+.logo img { height: 26px; width: auto; }
+.logo .l-light { display: var(--logo-light); }
+.logo .l-dark { display: var(--logo-dark); }
+.logo span { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .14em; border-left: 1px solid var(--line); padding-left: 12px; white-space: nowrap; }
+.top .sp { flex: 1; }
+.menu-btn {
+  display: none; align-items: center; gap: 8px; border: 0; background: var(--pink); box-shadow: 0 2px 5px rgba(0,0,0,.2);
+  color: #fff; font: 700 13px var(--jp); letter-spacing: .1em; border-radius: 999px; padding: 8px 16px; cursor: pointer;
+}
+.menu-btn i { width: 14px; height: 10px; position: relative; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+.menu-btn i::after { content: ""; position: absolute; left: 0; right: 0; top: 2px; border-top: 2px solid currentColor; }
+
+/* ---------- 全体レイアウト ---------- */
+.shell {
+  display: grid; grid-template-columns: 272px minmax(0, 1fr); gap: 56px;
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.side { position: sticky; top: calc(64px + env(safe-area-inset-top, 0px)); align-self: start; max-height: calc(100vh - 64px); overflow-y: auto; padding-block: 28px 40px; }
+@media (min-width: 961px) { .toc { background: var(--bg); border: 1px solid var(--pink); border-radius: 5px; padding: 20px 14px; } }
+.toc { display: flex; flex-direction: column; gap: 22px; }
+.toc .part > .pl { display: block; font-family: var(--en); font-weight: 700; font-size: 11px; letter-spacing: .24em; color: var(--pink); margin-bottom: 2px; }
+.toc .part > .pn { display: block; font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .12em; margin-bottom: 6px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.toc a {
+  display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: baseline; gap: 6px;
+  text-decoration: none; font-size: 13.5px; line-height: 1.6; color: var(--muted); padding: 6px 10px; border-radius: 8px;
+}
+.toc a .n { font-family: var(--en); font-weight: 600; font-size: 12px; color: var(--pink-soft); font-variant-numeric: tabular-nums; }
+.toc a:hover { background: var(--surface); color: var(--ink); }
+.toc a.on { background: var(--tint-pk); color: var(--ink); font-weight: 700; }
+.toc a.on .n { color: var(--pink); }
+
+main { min-width: 0; padding-block: 28px 96px; }
+.wrap { max-width: 820px; background: var(--bg); border-radius: 16px; padding: 28px 32px 40px; }
+
+/* ---------- 表紙：写真＋右の帯（筆記体とハッシュタグ）＋黒帯の白抜きタイトル ---------- */
+.cover { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 12px; overflow: hidden; min-height: 400px; background: #b5a0a8; }
+.cover .ph { position: relative; min-width: 0; }
+.cover .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; }
+.cover .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.35) 100%); }
+.cover-in { position: absolute; z-index: 1; left: 22px; right: 22px; bottom: 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.cover .lead { font-family: var(--maru); font-weight: 700; font-size: 15px; color: #3a3035; letter-spacing: .1em; padding: 0 4px 2px; text-shadow: 0 0 8px rgba(255,255,255,.9); }
+.cover h1 { margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.cover h1 span { font-family: var(--maru); font-weight: 700; background: #3a3035; color: #fff; line-height: 1.3; padding: 6px 14px 7px; letter-spacing: .08em; }
+.cover h1 .s1 { font-size: 22px; }
+.cover h1 .s2 { font-size: 34px; }
+.cover .side-panel { background: #b5a0a8; color: #fff; padding: 36px 26px; display: flex; flex-direction: column; justify-content: center; gap: 18px; min-width: 0; }
+.cover .script { font-family: var(--script); font-size: 54px; line-height: 1.1; color: transparent; -webkit-text-stroke: 1.5px #fff; letter-spacing: .02em; transform: rotate(-6deg); align-self: center; }
+@supports not (-webkit-text-stroke: 1px #fff) { .cover .script { color: #fff; } }
+.cover .hashtags { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 14px; font-weight: 500; letter-spacing: .06em; line-height: 1.7; }
+.cover .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.cover .meta span { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #fff; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; padding: 2px 12px; }
+
+/* はじめに読む導線 */
+.start { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.start a {
+  text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 16px;
+  border: 1px solid var(--pink); border-radius: 6px; background: var(--bg); position: relative; padding-top: 30px; box-shadow: 0 2px 5px rgba(0,0,0,.08); transition: transform .2s, box-shadow .2s;
+}
+.start a:hover { transform: translateY(3px); box-shadow: none; }
+.start .k { position: absolute; top: -1px; left: -1px; font-family: var(--en); font-weight: 700; font-size: 11px; letter-spacing: .2em; color: #fff; background: var(--pink); padding: 4px 14px 3px; border-radius: 6px 0 6px 0; }
+.start a::after { content: "→"; position: absolute; right: 16px; bottom: 14px; color: var(--pink); font-weight: 700; }
+.start .t { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.start .d { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+.how { margin-top: 28px; background: var(--bg); border: 1px solid var(--pink); border-radius: 5px; padding: 20px 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.how div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.how .lb { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .1em; }
+.how p { font-size: 13px; line-height: 1.75; }
+
+/* ---------- 部の扉 ---------- */
+.part-head { margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--line); position: relative; display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.part-head::before { content: ""; position: absolute; top: -1px; left: 0; width: 120px; height: 3px; background: var(--grad); }
+.part-head .pl { font-family: var(--en); font-weight: 700; font-size: 44px; line-height: .9; color: var(--pink-soft); letter-spacing: .04em; padding-top: .1em; }
+.part-head h2 { font-family: var(--maru); font-size: 24px; letter-spacing: .14em; color: var(--pink); border-bottom: 2px solid var(--pink); padding-bottom: 4px; }
+.part-head p { flex-basis: 100%; font-size: 14px; color: var(--muted); }
+
+/* ---------- 章 ---------- */
+.ch { margin-top: 56px; display: flex; flex-direction: column; gap: 20px; }
+.ch-head { display: flex; flex-direction: column; gap: 6px; }
+.ch-head .no { font-family: var(--en); font-weight: 600; font-size: 12px; letter-spacing: .26em; color: var(--blue); }
+.ch-head h3 { font-family: var(--maru); font-size: 21px; color: var(--pink); letter-spacing: .08em; border-left: 5px solid var(--pink); background: var(--surface); padding: .6em .8em; }
+.ch-head .sum { font-size: 14.5px; color: var(--muted); max-width: 62ch; }
+
+/* 条 */
+.arts { display: flex; flex-direction: column; gap: 10px; }
+.art { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.art .an { font-size: 12.5px; font-weight: 700; color: var(--pink); letter-spacing: .08em; padding-top: 3px; white-space: nowrap; }
+.art .ab { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.art .ab p { font-size: 14.5px; line-height: 1.85; }
+.art .ab .nt { font-size: 13px; color: var(--muted); }
+.art .ab ul { margin: 2px 0 0; padding-left: 1.2em; font-size: 14px; line-height: 1.85; }
+
+/* バッジ */
+.tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 4px 8px 3px; border-radius: 6px; vertical-align: 2px; margin-left: 6px; white-space: nowrap; }
+.tag.must { background: var(--tint-pk); color: var(--pink); }
+.tag.rec { background: var(--tint-bl); color: var(--blue); }
+.tag.tbd { background: var(--warn-bg); color: var(--warn-fg); }
+
+/* ビジョン・ミッション */
+.mv { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.mv div { border-radius: 14px; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+.mv .v { background: var(--tint-bl); }
+.mv .m { background: var(--tint-pk); }
+.mv .lb { font-family: var(--en); font-weight: 700; font-size: 12px; letter-spacing: .3em; }
+.mv .v .lb { color: var(--blue); }
+.mv .m .lb { color: var(--pink); }
+.mv p { font-family: var(--maru); font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.7; letter-spacing: .08em; }
+
+/* 理想の講師像 */
+.traits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.trait { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.trait h4 { font-size: 15px; letter-spacing: .06em; }
+.trait p { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+
+/* 3つの約束 */
+.promises { display: flex; flex-direction: column; gap: 18px; }
+.pr { border-radius: 18px; background: var(--surface); padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+.pr-top { display: flex; align-items: center; gap: 14px; }
+.pr-top .num { font-family: var(--en); font-weight: 700; font-size: 40px; line-height: 1; color: var(--pink-soft); padding-top: .12em; min-width: 40px; }
+.pr-top h4 { font-size: 21px; letter-spacing: .12em; }
+.pr .def { background: var(--bg); border: 1.5px solid var(--pink-soft); border-radius: 12px; padding: 16px 18px; }
+.pr .def .lb { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .12em; display: block; margin-bottom: 4px; }
+.pr .def p { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.8; }
+.pr .goal { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
+.pr .goal .lb { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: .1em; background: var(--tint-bl); border-radius: 6px; padding: 4px 9px 3px; line-height: 1.4; margin-top: 3px; white-space: nowrap; }
+.pr .goal p { font-size: 14.5px; line-height: 1.85; }
+.pr ul { margin: 0; padding-left: 1.2em; font-size: 14px; line-height: 1.9; }
+.ex { border-left: 3px solid var(--pink-soft); padding: 4px 0 4px 14px; display: flex; flex-direction: column; gap: 6px; }
+.ex .lb { font-size: 11.5px; font-weight: 700; color: var(--muted); letter-spacing: .12em; }
+.ex p { font-size: 14px; line-height: 1.85; color: var(--ink); }
+
+/* 数字のルール */
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.numc { border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.numc .lb { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .08em; }
+.numc .v { font-size: 28px; font-weight: 700; color: var(--pink); line-height: 1.3; letter-spacing: .02em; }
+.numc .v small { font-size: 14px; color: var(--ink); margin-left: 2px; letter-spacing: .06em; }
+.numc .v .en { font-size: 32px; font-variant-numeric: tabular-nums; }
+.numc .d { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+/* やってはいけないこと */
+.donts { display: flex; flex-direction: column; gap: 10px; }
+.dont { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.dont > div { padding: 14px 16px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.dont .x { background: var(--surface); }
+.dont .lb { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; }
+.dont .x .lb { color: var(--muted); }
+.dont .o .lb { color: var(--ok); }
+.dont .x p { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+.dont .o p { font-size: 14px; line-height: 1.8; }
+
+/* 表 */
+.tbl { overflow-x: auto; border: 1px solid var(--pink-soft); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.75; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .1em; background: var(--tint-pk); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.ng { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--pink-soft); white-space: nowrap; }
+td.okw { font-weight: 700; color: var(--ink); }
+
+/* 報告の流れ */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; align-items: stretch; }
+.flow .st { position: relative; border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; margin-right: 22px; display: flex; flex-direction: column; gap: 4px; background: var(--bg); min-width: 0; }
+.flow .st:last-child { margin-right: 0; }
+.flow .st:not(:last-child)::after { content: ""; position: absolute; right: -16px; top: 50%; width: 10px; height: 10px; border-top: 2px solid var(--pink-soft); border-right: 2px solid var(--pink-soft); transform: translateY(-50%) rotate(45deg); }
+.flow .st.hl { border-color: var(--pink-soft); background: var(--tint-pk); }
+.flow .who { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+.flow .what { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+/* 1年の流れ */
+.weeks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.wk { border-radius: 14px; background: var(--surface); padding: 16px 14px 14px; display: flex; flex-direction: column; gap: 6px; position: relative; min-width: 0; }
+.wk .w { font-family: var(--en); font-weight: 700; font-size: 12px; letter-spacing: .2em; color: var(--blue); }
+.wk h4 { font-size: 15px; letter-spacing: .06em; line-height: 1.5; }
+.wk p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+.wk .out { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--txt); line-height: 1.65; }
+.wk .out b { color: var(--pink); }
+.wk.goal { background: var(--tint-pk); }
+.months { margin-top: 6px; display: flex; flex-direction: column; border-left: 2px solid var(--line); margin-left: 8px; }
+.mo { position: relative; padding: 2px 0 18px 26px; display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; }
+.mo:last-child { padding-bottom: 0; }
+.mo::before { content: ""; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--blue); }
+.mo.key::before { background: var(--pink); border-color: var(--pink); }
+.mo .when { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .06em; line-height: 1.7; }
+.mo .when small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+.mo .what { font-size: 14px; line-height: 1.8; min-width: 0; }
+.mo .what .nt { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+/* ステップ */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.step { border: 1px solid var(--line); border-radius: 14px; padding: 16px 14px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.step .sn { font-family: var(--en); font-weight: 700; font-size: 26px; color: var(--pink-soft); line-height: 1; padding-top: .1em; }
+.step h4 { font-size: 14.5px; letter-spacing: .04em; line-height: 1.55; }
+.step p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+.step.hl { background: var(--tint-pk); border-color: transparent; }
+
+.bracket { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.box { border-radius: 14px; background: var(--surface); padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.box h4 { font-size: 15px; letter-spacing: .06em; }
+.box .lb { font-family: var(--en); font-weight: 700; font-size: 11px; letter-spacing: .22em; color: var(--blue); }
+.box ul { margin: 0; padding-left: 1.2em; font-size: 13.5px; line-height: 1.85; }
+.box p { font-size: 13.5px; line-height: 1.85; }
+
+/* シート */
+.sheets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.sheet { border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.sheet h4 { font-size: 16px; letter-spacing: .06em; display: flex; align-items: center; gap: 10px; }
+.sheet h4 i { width: 10px; height: 10px; border-radius: 3px; background: var(--pink-soft); flex: none; }
+.sheet dl { margin: 0; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 6px 10px; font-size: 13.5px; line-height: 1.7; }
+.sheet dt { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .08em; padding-top: 2px; }
+.sheet dd { margin: 0; }
+.sheet.main { border-color: var(--pink-soft); background: var(--tint-pk); }
+
+/* 添削の型 */
+.recipe { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.recipe li { list-style: none; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.recipe li:last-child { border-bottom: 0; }
+.recipe ol { margin: 0; padding: 0; }
+.recipe .rn { font-family: var(--en); font-weight: 700; font-size: 20px; color: var(--pink); line-height: 1.4; }
+.recipe h4 { font-size: 14.5px; letter-spacing: .04em; }
+.recipe p { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+
+/* グルコン */
+.gc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.gc div { border-radius: 14px; background: var(--surface); padding: 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.gc .c { font-size: 26px; font-weight: 700; color: var(--pink); line-height: 1.3; }
+.gc .c small { font-size: 13px; color: var(--ink); margin-left: 2px; }
+.gc h4 { font-size: 14.5px; }
+.gc p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+/* サイン */
+.signs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.sign { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.sign h4 { font-size: 14.5px; letter-spacing: .04em; }
+.sign p { font-size: 13.5px; color: var(--txt); line-height: 1.8; }
+.sign p::before { content: "声かけ例　"; font-size: 11.5px; font-weight: 700; color: var(--blue); letter-spacing: .1em; }
+
+/* チェックリスト */
+.checks { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.checks .grp { padding: 10px 18px 6px; font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .12em; background: var(--surface); border-bottom: 1px solid var(--line); }
+.checks label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 18px; border-bottom: 1px solid var(--line); cursor: pointer; font-size: 14px; line-height: 1.75; }
+.checks label:last-child { border-bottom: 0; }
+.checks input { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 1.5px solid var(--pink-soft); border-radius: 6px; margin: 3px 0 0; display: grid; place-items: center; cursor: pointer; background: var(--bg); }
+.checks input:checked { background: var(--pink); border-color: var(--pink); }
+.checks input:checked::after { content: ""; width: 5px; height: 10px; border: solid var(--bg); border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.checks input:checked + span { color: var(--muted); }
+.check-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.check-foot b { color: var(--pink); font-variant-numeric: tabular-nums; }
+.reset { border: 0; background: var(--pink-soft); color: #fff; font: 700 12px var(--jp); letter-spacing: .08em; border-radius: 999px; padding: 7px 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,.15); transition: transform .2s; }
+.reset:hover { transform: translateY(2px); box-shadow: none; }
+
+/* 1週間 */
+.days { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.day { border-radius: 14px; border: 1px solid var(--line); padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.day .dn { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: .1em; }
+.day h4 { font-size: 15px; letter-spacing: .04em; line-height: 1.5; }
+.day p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+.day.goal { background: var(--tint-pk); border-color: transparent; }
+
+/* 講師カード */
+.card {
+  border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--grad) border-box; border: 2px solid transparent;
+}
+.card .hd { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.card .hd .en { font-weight: 700; font-size: 12px; letter-spacing: .3em; color: var(--pink); }
+.card .hd span:last-child { font-size: 12px; color: var(--muted); }
+.card .mis { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.7; letter-spacing: .08em; }
+.card ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.card li { background: var(--surface); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card li b { font-size: 14.5px; }
+.card li span { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+.card .rules { display: flex; flex-wrap: wrap; gap: 8px; }
+.card .rules span { font-size: 12.5px; font-weight: 700; color: var(--ink); background: var(--tint-bl); border-radius: 999px; padding: 4px 12px; }
+
+/* 外部リンク */
+.linkbtn { display: flex; align-items: center; gap: 14px; text-decoration: none; border: 0; background: var(--pink); border-radius: 8px; padding: 16px 20px; box-shadow: 0 2px 5px rgba(0,0,0,.2); transition: transform .2s, box-shadow .2s; }
+.linkbtn:hover { transform: translateY(3px); box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+.linkbtn .ic { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #fff; color: var(--pink); display: grid; place-items: center; font: 700 18px var(--en); }
+.linkbtn .tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.linkbtn .t { font-size: 16px; font-weight: 700; color: #fff; }
+.linkbtn .d { font-size: 12.5px; color: rgba(255,255,255,.9); line-height: 1.6; }
+.linkbtn .d b { color: #fff !important; text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn .go { flex: none; font-size: 13px; font-weight: 700; color: var(--pink); background: #fff; border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
+
+.note { font-size: 13px; color: var(--muted); background: var(--surface); border-radius: 10px; padding: 12px 16px; line-height: 1.8; }
+.note b { color: var(--ink); }
+
+footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .menu-btn { display: inline-flex; }
+  .side {
+    position: fixed; z-index: 30; top: calc(64px + env(safe-area-inset-top, 0px)); left: 0; right: 0; bottom: 0; max-height: none;
+    background: var(--bg); padding: 20px max(20px, env(safe-area-inset-right, 0px)) calc(40px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+    transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  }
+  body.nav-open .side { transform: none; opacity: 1; pointer-events: auto; }
+  body.nav-open { overflow: hidden; }
+}
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  .logo span { display: none; }
+  .wrap { padding: 20px 16px 32px; border-radius: 12px; }
+  .cover { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .cover .ph { min-height: 300px; }
+  .cover-in { left: 14px; right: 14px; bottom: 18px; }
+  .cover h1 .s1 { font-size: 17px; }
+  .cover h1 .s2 { font-size: 26px; }
+  .cover .side-panel { padding: 22px 20px; gap: 12px; }
+  .cover .script { font-size: 40px; }
+  .start, .how { grid-template-columns: minmax(0, 1fr); }
+  .mv, .traits, .bracket, .sheets, .signs { grid-template-columns: minmax(0, 1fr); }
+  .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .weeks, .steps, .days { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gc { grid-template-columns: minmax(0, 1fr); }
+  .card ol { grid-template-columns: minmax(0, 1fr); }
+  .dont { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .flow .st { margin-right: 0; }
+  .flow .st:not(:last-child)::after { right: auto; left: 24px; top: auto; bottom: -14px; transform: rotate(135deg); }
+  .mo { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .art { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .part-head .pl { font-size: 34px; }
+  .pr { padding: 20px 18px; }
+  .card { padding: 20px; }
+}
+@media (max-width: 420px) {
+  .weeks, .steps, .days, .nums { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#top" aria-label="HASH HACK 講師マニュアルの先頭へ">
+      <img class="l-light" src="img/logo.png" alt="HASH HACK" width="105" height="26">
+      <img class="l-dark" src="img/logo_white.png" alt="HASH HACK" width="105" height="26">
+      <span>講師マニュアル</span>
+    </a>
+    <div class="sp"></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="side"><i></i>目次</button>
+  </div>
+</header>
+
+<div class="shell" id="top">
+  <aside class="side" id="side" aria-label="目次">
+    <nav class="toc">
+      <div class="part">
+        <span class="pl">PART 1</span><span class="pn">理念編</span>
+        <ol>
+          <li><a href="#ch1"><span class="n">01</span><span>ビジョンとミッション</span></a></li>
+          <li><a href="#ch2"><span class="n">02</span><span>理想の講師像</span></a></li>
+          <li><a href="#ch3"><span class="n">03</span><span>講師の3つの約束</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">PART 2</span><span class="pn">ルール編</span>
+        <ol>
+          <li><a href="#ch4"><span class="n">04</span><span>講師の基本ルール</span></a></li>
+          <li><a href="#ch5"><span class="n">05</span><span>やってはいけないこと</span></a></li>
+          <li><a href="#ch6"><span class="n">06</span><span>報告と相談</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">PART 3</span><span class="pn">実務編</span>
+        <ol>
+          <li><a href="#ch7"><span class="n">07</span><span>受講生さんの1年の流れ</span></a></li>
+          <li><a href="#ch8"><span class="n">08</span><span>初回ミーティング</span></a></li>
+          <li><a href="#ch9"><span class="n">09</span><span>週1回の個別ミーティング</span></a></li>
+          <li><a href="#ch10"><span class="n">10</span><span>5つのシートの使い方</span></a></li>
+          <li><a href="#ch11"><span class="n">11</span><span>チャットと添削</span></a></li>
+          <li><a href="#ch12"><span class="n">12</span><span>グルコン</span></a></li>
+          <li><a href="#ch13"><span class="n">13</span><span>気づいて声をかける</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">PART 4</span><span class="pn">チーム編</span>
+        <ol>
+          <li><a href="#ch14"><span class="n">14</span><span>講師定例とルールの決め直し</span></a></li>
+          <li><a href="#ch15"><span class="n">15</span><span>新しい講師の最初の1週間</span></a></li>
+          <li><a href="#leave"><span class="n">16</span><span>講師を辞めるとき</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">PART 5</span><span class="pn">報酬編</span>
+        <ol>
+          <li><a href="#ch16"><span class="n">17</span><span>報酬の項目と金額</span></a></li>
+          <li><a href="#ch17"><span class="n">18</span><span>成果ボーナス</span></a></li>
+          <li><a href="#ch18"><span class="n">19</span><span>請求書の出し方</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">APPENDIX</span><span class="pn">付録</span>
+        <ol>
+          <li><a href="#check"><span class="n">A</span><span>品質セルフチェック</span></a></li>
+          <li><a href="#card"><span class="n">B</span><span>講師カード</span></a></li>
+        </ol>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="wrap">
+
+      <!-- 表紙 -->
+      <section class="cover" aria-label="表紙">
+        <div class="ph">
+          <img src="img/cover.jpg" alt="">
+          <div class="cover-in">
+            <p class="lead">＼ 受講生さんと向き合うすべてを、ここに ／</p>
+            <h1><span class="s1">HASH HACK</span><span class="s2">講師マニュアル</span></h1>
+          </div>
+        </div>
+        <div class="side-panel">
+          <span class="script" aria-hidden="true">Manual</span>
+          <div class="hashtags"><span>#3つの約束</span><span>#基本ルール</span><span>#実務の流れ</span><span>#チーム</span><span>#報酬</span></div>
+          <div class="meta"><span>全5部・19章</span><span>2026年11月版</span></div>
+        </div>
+      </section>
+
+      <div class="start">
+        <a href="#ch15"><span class="k">NEW</span><span class="t">はじめての講師の方へ</span><span class="d">最初の1週間でやることと、担当を持つまでの流れ</span></a>
+        <a href="#ch3"><span class="k">PROMISE</span><span class="t">講師の3つの約束</span><span class="d">毎日いちばん大事にしてほしいこと</span></a>
+        <a href="#ch4"><span class="k">RULES</span><span class="t">基本ルール</span><span class="d">返信・添削の期限、ミーティング、連絡の方法</span></a>
+      </div>
+
+      <div class="how">
+        <div><span class="lb">いつ読む</span><p>担当を持つ前に全部。初回ミーティングの前に第3章・第8章をもう一度。</p></div>
+        <div><span class="lb">印の意味</span><p><span class="tag must" style="margin-left:0">必須</span> 全員が必ず守る　<span class="tag rec" style="margin-left:0">推奨</span> 受講生さんに合わせて変えてよい</p></div>
+        <div><span class="lb">迷ったら</span><p>一人で決めずに講師責任者へ相談（第6章）。<span class="tag tbd" style="margin-left:0">要確認</span>は運営で決定中の項目です。</p></div>
+      </div>
+
+      <!-- ===================== PART 1 ===================== -->
+      <div class="part-head"><span class="pl">PART 1</span><h2>理念編</h2><p>なぜHASH HACKの講師をするのか。すべての判断の土台です。</p></div>
+
+      <section class="ch" id="ch1">
+        <div class="ch-head"><span class="no">CHAPTER 01</span><h3>HASH HACKのビジョンとミッション</h3><p class="sum">講師のすべての判断は、このミッションに立ち返って決めます。</p></div>
+        <div class="mv">
+          <div class="v"><span class="lb">VISION</span><p>一人一人が私らしく人生の主人公でいられる場所を作る</p></div>
+          <div class="m"><span class="lb">MISSION</span><p>キャリアを一度手放したママのセカンドキャリアを作る</p></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>講師の仕事は、SNS運用のやり方を教えることだけではありません。<b>受講生さんが卒業したあと、自分の力で仕事や売上につなげられる状態をつくること</b>です。</p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>受講生さんの多くは、家事や育児の合間に取り組んでいます。一度キャリアを離れているので、「自分にできるのかな」という不安を持っています。この前提を忘れずに関わります。</p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>どの講師が担当しても、受講生さんは同じ品質のサポートを受けられるようにします。担当によって結果が変わる状態は、ミッションに反します。</p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch2">
+        <div class="ch-head"><span class="no">CHAPTER 02</span><h3>理想の講師像</h3><p class="sum">実績はある程度あれば十分です。HASH HACKが講師に求めるのは、人間力と、受講生さんと向き合う姿勢です。</p></div>
+        <div class="traits">
+          <div class="trait"><h4>受講生さんを一番に考える</h4><p>自分の都合ではなく、受講生さんのためになるかどうかで行動を決める。</p></div>
+          <div class="trait"><h4>決まりごとをきちんと守る</h4><p>講師定例への参加や返信の期限など、受講生さんのための決まりを自分から守る。</p></div>
+          <div class="trait"><h4>結果を出させてあげたいと思う</h4><p>「教えたら終わり」ではなく、受講生さんが結果を出すところまで意識して関わる。</p></div>
+          <div class="trait"><h4>悩みに気づいて声をかける</h4><p>「この人、今悩んでいるな」と気づいたら、自分から声をかけられる（第13章）。</p></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch3">
+        <div class="ch-head"><span class="no">CHAPTER 03</span><h3>講師の3つの約束</h3><p class="sum">初回ミーティングで、受講生さんにこの3つを約束しています。約束ごとに「一番大事にすること」を1つだけ決めています。まずはこの3つを確実に守ってください。</p></div>
+        <div class="promises">
+
+          <article class="pr">
+            <div class="pr-top"><span class="num">1</span><h4>ひとりにしません</h4></div>
+            <div class="def"><span class="lb">一番大事にすること<span class="tag must">必須</span></span><p>チャットの質問に必ず返信する。すぐ答えられないときは、まず「確認して、○日○時までに返します」と返す。</p></div>
+            <div class="goal"><span class="lb">未来ゴール</span><p>受講生さんが「聞けば必ず返ってくる」と安心して、迷ったらすぐ質問できる。一人で悩んで手が止まる時間がなくなる。</p></div>
+            <ul>
+              <li>質問には<b>6時間以内</b>に返信する（夜・休日に届いたものは翌朝から6時間以内）</li>
+              <li>伝えた期限は必ず守る。間に合わないとわかったら、期限の前にもう一度連絡する</li>
+              <li>受講生さんが「放っておかれている」と感じるのは、答えが出ないときより、返事がないとき。答えの中身より先に「受け取ったよ」を届ける</li>
+            </ul>
+            <div class="ex"><span class="lb">返信の例</span><p>「ご質問ありがとうございます！確認して、明日の18時までにお返事しますね。」</p></div>
+          </article>
+
+          <article class="pr">
+            <div class="pr-top"><span class="num">2</span><h4>とことん伴走します</h4></div>
+            <div class="def"><span class="lb">一番大事にすること<span class="tag must">必須</span></span><p>添削は一言で終わらせず、具体的に伝える。よかった点は「どこが、なぜよいか」、直す点は最大3つに絞って「なぜ直すか」と「どう直すか」を必ず書いて返す。</p></div>
+            <div class="goal"><span class="lb">未来ゴール</span><p>次に何をすればいいかがいつも分かっている。よかった点は理由ごと分かるので次も同じようにでき、直す点は直し方ごと身につく。卒業のころには、自分で判断して直せるようになる。</p></div>
+            <ul>
+              <li>添削は<b>24時間以内</b>に返す</li>
+              <li>直す点がたくさんあっても、成果に一番効くものから最大3つ。残りは次回以降に回す</li>
+              <li>「いいですね」「ここを直しましょう」の一言だけで終わらせない。よい投稿を出してきたときこそ、どこがよいかを具体的に伝える</li>
+            </ul>
+            <div class="ex"><span class="lb">よかった点の例</span><p>「1枚目の『食費月3万の家のおうちカフェ』、すごくいいです！数字が入っていて、同じ悩みの人が『私のことだ』と思って止まってくれる一文になっています。」</p></div>
+            <div class="ex"><span class="lb">直す点の例</span><p>「2枚目は文字が多いので、1枚に1つのことに絞ってみましょう。スマホで流し見されても、パッと読めるようになるからです。」</p></div>
+          </article>
+
+          <article class="pr">
+            <div class="pr-top"><span class="num">3</span><h4>できたことを一緒に喜びます</h4></div>
+            <div class="def"><span class="lb">一番大事にすること<span class="tag must">必須</span></span><p>提出物や報告には必ず、「前よりできるようになったこと」を具体的に1つ伝える。</p></div>
+            <div class="goal"><span class="lb">未来ゴール</span><p>自分の成長を実感して「私にもできる」と自信を持ち、成果が出るまで続けられる。</p></div>
+            <ul>
+              <li>「いいですね」ではなく、どこがどうよくなったかを言う</li>
+              <li>比べるのは過去の本人だけ。ほかの受講生さんとは比べない</li>
+              <li>成果がまだ出ていなくても、できるようになったことは必ずある。それを探して言葉にするのが講師の仕事</li>
+            </ul>
+            <div class="ex"><span class="lb">伝え方の例</span><p>「前回は文字が多くて読むのに時間がかかったけど、今回は1枚目で何の投稿かすぐ分かりました！」</p></div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ===================== PART 2 ===================== -->
+      <div class="part-head"><span class="pl">PART 2</span><h2>ルール編</h2><p>講師全員が必ず守ることです。講師の判断では変えられません。</p></div>
+
+      <section class="ch" id="ch4">
+        <div class="ch-head"><span class="no">CHAPTER 04</span><h3>講師の基本ルール</h3><p class="sum">まずはこの数字を覚えてください。</p></div>
+        <div class="nums">
+          <div class="numc"><span class="lb">チャットの返信</span><span class="v"><span class="en">6</span><small>時間以内</small></span><span class="d">受講生さんには「24時間以内」と案内する</span></div>
+          <div class="numc"><span class="lb">添削の返却</span><span class="v"><span class="en">24</span><small>時間以内</small></span><span class="d">LINE・スプレッドシートどちらも同じ</span></div>
+          <div class="numc"><span class="lb">夜・休日の連絡</span><span class="v">翌朝<small>から6時間</small></span><span class="d">「朝」の開始時刻は<span class="tag tbd">要確認</span></span></div>
+          <div class="numc"><span class="lb">個別ミーティング</span><span class="v"><span class="en">40</span><small>分 / 週1回</small></span><span class="d">1時間枠で予定を組む。残りの15〜20分は録画の格納などに使う</span></div>
+          <div class="numc"><span class="lb">講師定例</span><span class="v">週<span class="en">1</span><small>回・必須</small></span><span class="d">講師同士のミーティング</span></div>
+          <div class="numc"><span class="lb">担当人数の目安</span><span class="v"><span class="en">10–15</span><small>名</small></span><span class="d">講師1人あたり</span></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>受講生さんとの連絡はLINEで行う。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>チャットの質問には6時間以内に返信する。受講生さんには「24時間以内に返信します」と案内する。<span class="tag must">必須</span></p><p class="nt">講師の基準を短くしておくことで、受講生さんに約束した24時間を必ず守れるようにしています。</p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>夜や休日に届いた連絡は、翌朝から6時間以内に返信する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>添削は24時間以内に返す。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>受講生さんとの個別ミーティングは週1回・1コマ40分、Google Meetで行う。予定は<b>1時間枠</b>で組み、レッスン後の15〜20分は録画の格納などの作業に使う。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>個別ミーティングの<b>当日の朝</b>に、受講生さんへリマインドを送る。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第7条</span><div class="ab"><p>受講生さんが急に欠席した回は、講師に報酬が出ない。欠席を防ぐことも講師の責任として扱う。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第8条</span><div class="ab"><p>講師定例（週1回）には必ず参加する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第9条</span><div class="ab"><p>休みなどで返信できない期間があるときは、事前に講師責任者と担当の受講生さんに伝える。<span class="tag tbd">要確認</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch5">
+        <div class="ch-head"><span class="no">CHAPTER 05</span><h3>講師がやってはいけないこと</h3><p class="sum">受講生さんの安心と自信を壊す行動です。左の行動はせず、右のように対応します。</p></div>
+        <div class="donts">
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>成果や金額を約束する</p></div><div class="o"><span class="lb">代わりに</span><p>実績を紹介するときは「こういう方もいます」にとどめる。「半年で月25万円稼げます」のような言い方はしない。</p></div></div>
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>受講生さん同士を比べる</p></div><div class="o"><span class="lb">代わりに</span><p>比べるのは過去の本人だけ。「前回より○○ができるようになりましたね」と伝える。</p></div></div>
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>けなす・否定する</p></div><div class="o"><span class="lb">代わりに</span><p>直す点は「なぜ」と「どう直すか」をセットで伝える（第3章 約束2）。</p></div></div>
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>生活を尊重しない言い方をする</p></div><div class="o"><span class="lb">代わりに</span><p>生活のレベルや使える時間は人それぞれ。「忙しくてできなかった」と言われたら、どうすれば時間を作れるかを一緒に考える。</p></div></div>
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>投げ出す</p></div><div class="o"><span class="lb">代わりに</span><p>進みが遅くても、伸び悩んでいても、どこを直せばいいかを一緒に考え続ける。</p></div></div>
+          <div class="dont"><div class="x"><span class="lb">やらない</span><p>決めつける</p></div><div class="o"><span class="lb">代わりに</span><p>「この人はできないだろう」「やりたくないだろう」と、聞かずに進めない。提案するときは必ず本人に聞き、本人の口から答えを聞く。</p></div></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>受講生さんの個人情報・相談内容・成果を、本人の了解なくほかの人やSNSに出さない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>ほかの講師やHASH HACKの運営を、受講生さんの前で悪く言わない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>次の言葉は言い換えて使う。<span class="tag must">必須</span></p></div></div>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>使わない言葉</th><th>代わりに使う言葉</th><th>理由</th></tr></thead>
+            <tbody>
+              <tr><td class="ng">収益化</td><td class="okw">売上につなげる／お仕事につなげる</td><td>お金だけが目的に聞こえるため</td></tr>
+              <tr><td class="ng">簡単です、誰でもできます</td><td class="okw">一緒にやれば大丈夫です</td><td>できなかったときに自分を責めてしまうため</td></tr>
+              <tr><td class="ng">なんでやってないんですか？</td><td class="okw">今、何か止まっていることはありますか？</td><td>責められていると感じるため</td></tr>
+              <tr><td class="ng">○○さんはもうできていますよ</td><td class="okw">前回より○○ができるようになりましたね</td><td>ほかの人と比べないため</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ch" id="ch6">
+        <div class="ch-head"><span class="no">CHAPTER 06</span><h3>報告と相談</h3><p class="sum">一人で抱えないことも「ひとりにしません」の一部です。講師も一人にしません。</p></div>
+        <div class="flow">
+          <div class="st"><span class="who">受講生さん</span><span class="what">キャンセル・やめたい・不満などの相談</span></div>
+          <div class="st"><span class="who">担当講師</span><span class="what">話を聞く。判断や約束はしない</span></div>
+          <div class="st hl"><span class="who">講師責任者</span><span class="what">すぐ報告（LINEグループか個人LINE）</span></div>
+          <div class="st"><span class="who">運営</span><span class="what">退会・返金などの対応</span></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>報告・相談は、講師のLINEグループか講師責任者の個人LINEに送る。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>次のことがあったら、<b>すぐに</b>講師責任者へ報告する。<span class="tag must">必須</span></p><ul><li>キャンセル（クーリングオフ）の話が出た</li><li>「途中でやめたい」と言われた</li><li>不満やクレームを言われた、トラブルになった</li><li>心や体の不調が心配なとき</li></ul></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>退会・返金は運営が対応する。講師は引き止めも約束もせず、話を聞いて「担当から改めてご連絡します」と伝え、報告する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>報告には次の3つを書く。<span class="tag must">必須</span></p><ul><li>何が起きたか</li><li>受講生さんにどう伝えたか</li><li>講師責任者に何を決めてほしいか</li></ul></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>マニュアルにない場面や判断に迷う場面では、一人で決めずに講師責任者に相談する。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <!-- ===================== PART 3 ===================== -->
+      <div class="part-head"><span class="pl">PART 3</span><h2>実務編</h2><p>担当を持ったら、いつ・何を・どう進めるか。基準は講師責任者のやり方です。</p></div>
+
+      <section class="ch" id="ch7">
+        <div class="ch-head"><span class="no">CHAPTER 07</span><h3>受講生さんの1年の流れ</h3><p class="sum">コースは半年〜1年です。最初の1ヶ月は週ごとに進め方が決まっています。2ヶ月目からは、受講生さんのペースに合わせて進めます。</p></div>
+        <div class="weeks">
+          <div class="wk"><span class="w">WEEK 1</span><h4>初回ミーティング</h4><p>お互いの自己紹介。5つのシートをまとめたスプレッドシートを渡し、目標設定シートと自己紹介動画を課題にする。</p><span class="out">できること：<b>講師と同じ方向を向く</b></span></div>
+          <div class="wk"><span class="w">WEEK 2</span><h4>動画作成の練習</h4><p>上手な人の動画を選び、丸ごと真似して作る課題を出す。</p><span class="out">できること：<b>編集に慣れる</b></span></div>
+          <div class="wk"><span class="w">WEEK 3</span><h4>競合リサーチ</h4><p>だいたい決まったジャンルで、競合のアカウントを調べる。</p><span class="out">できること：<b>伸びている発信が分かる</b></span></div>
+          <div class="wk goal"><span class="w">WEEK 4</span><h4>コンセプトワーク</h4><p>コンセプトワーク設計シートで、アカウントの軸を決める。</p><span class="out">できること：<b>アカウントの全体像ができる</b></span></div>
+        </div>
+        <div class="months">
+          <div class="mo"><span class="when">2ヶ月目</span><span class="what">投稿を始める。</span></div>
+          <div class="mo"><span class="when">3ヶ月目</span><span class="what">売上につなげる準備を始める。<span class="nt">2〜3ヶ月目は伸び悩みやすい時期。どこを直せばいいかを、個別ミーティングでしっかり話す。</span></span></div>
+          <div class="mo"><span class="when">毎月</span><span class="what">振り返りシートで、目標に対して今どこにいるかを一緒に確認する。</span></div>
+          <div class="mo key"><span class="when">中間の見直し<small>半年：3ヶ月目<br>1年：3・6・9ヶ月目</small></span><span class="what">目標設定シートを一緒に見直し、次の3ヶ月の計画を立て直す。<span class="nt">実施方法は<span class="tag tbd" style="margin-left:2px">要確認</span></span></span></div>
+          <div class="mo"><span class="when">卒業1ヶ月前</span><span class="what">卒業後に一人で続けるための計画を一緒に作る。<span class="nt">継続・上位コースの案内は<span class="tag tbd" style="margin-left:2px">要確認</span></span></span></div>
+          <div class="mo key"><span class="when">卒業</span><span class="what">コース中にできるようになったことを、最初の目標設定シートと比べて伝える。</span></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch8">
+        <div class="ch-head"><span class="no">CHAPTER 08</span><h3>初回ミーティング</h3><p class="sum">ゴールは、受講生さんが「この選択でよかった」「ワクワクする」と感じて終わること。1対1・約30分で、初回ミーティング資料を画面共有しながら、資料どおりに進めます。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">BEFORE</span><h4>事前の準備</h4><ul><li>受講生さんを振り分けるときに、セールスマンから事前情報が届く。<b>必ず読み込んでおく</b></li><li>資料の「講師紹介」ページを自分の内容に書き換える</li><li>なぜHASH HACKで講師をしているかを、1分で話せるようにしておく</li><li>5つのシートのスプレッドシートを、受講生さんの名前を入れて用意しておく</li></ul></div>
+          <div class="box"><span class="lb">AFTER</span><h4>終わったあと</h4><ul><li>当日中にお礼を送り、課題の内容と期限を文字でもう一度伝える</li><li>聞いたこと（始めた理由、使える時間、不安なこと）を記録する</li><li>気になる点があれば講師責任者に共有する</li></ul></div>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>順番</th><th>内容</th><th>必ず伝えること</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>はじめに・理念・3つの約束</td><td>3つの約束を、講師自身の言葉で伝える</td></tr>
+              <tr><td>2</td><td>講師の自己紹介・受講生さんの自己紹介</td><td>講師から先に話す。受講生さんの「なぜ始めたか」を本人の口から聞く</td></tr>
+              <tr><td>3</td><td>サポートの説明</td><td>チャット・添削・グルコン・個別ミーティングの使い方と、1年の流れ</td></tr>
+              <tr><td>4</td><td>ワークと課題</td><td>目標設定シートと自己紹介動画（CapCut・20秒〜1分、完成したらLINEで送る）の目的と期限</td></tr>
+              <tr><td>5</td><td>最後に</td><td>「何かあったらいつでも連絡してね」と伝え、次にやることを確認する</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>初回ミーティングは、初回ミーティング資料に沿って行う。資料の中身を講師が変えない。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch9">
+        <div class="ch-head"><span class="no">CHAPTER 09</span><h3>週1回の個別ミーティング</h3><p class="sum">Google Meetで1コマ40分。予定は1時間枠で組み、レッスン後の15〜20分は録画の格納などの作業に使います。毎回この順番で進めます。</p></div>
+        <div class="steps">
+          <div class="step"><span class="sn en">1</span><h4>先週のタスクの確認</h4><p>タスク管理シートを一緒に見て、できたものにチェックを入れる。</p></div>
+          <div class="step hl"><span class="sn en">2</span><h4>今の悩み・現状を聞く</h4><p>受講生さん本人の口から話してもらう時間をとる。</p></div>
+          <div class="step"><span class="sn en">3</span><h4>課題へのフィードバック</h4><p>提出された課題に、よかった点と直す点を伝える。</p></div>
+          <div class="step"><span class="sn en">4</span><h4>次のタスクを決める</h4><p>講師がタスク管理シートに書く。次回はここから確認する。</p></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>当日の朝にリマインドを送る（第4章 第6条）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>上の4つの順番で進める。2の「本人の口から話してもらう時間」は省かない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>次のタスクは講師がタスク管理シートに書く。受講生さんが「次に何をすればいいか」をすぐ分かる書き方にする。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>ミーティングの中で、グルコンへの参加を勧める（第12章）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>レッスンは<b>1時間枠</b>で考える。40分のレッスンが終わったら、残りの15〜20分で録画の格納などの作業をする。<b>録画はレッスンが終わり次第すぐに格納する</b>（第17章 第2条）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>次回の日程は、ミーティングの中でお互いの都合を聞いて決める。<span class="tag tbd">検討中：受講生さんがカレンダーから予約する形に変える予定</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch10">
+        <div class="ch-head"><span class="no">CHAPTER 10</span><h3>5つのシートの使い方</h3><p class="sum">5つのシートは1つのスプレッドシートにまとまっています。初回ミーティングで渡し、必要な時期に使います。</p></div>
+        <div class="sheets">
+          <div class="sheet main"><h4><i></i>タスク管理シート</h4><dl><dt>目的</dt><dd>受講生さんが、次に何をすればいいかをすぐ分かるようにする</dd><dt>書く人</dt><dd><b>講師が必ず書く</b></dd><dt>使う時期</dt><dd>毎週の個別ミーティング。次回、できたものにチェックを入れる</dd></dl></div>
+          <div class="sheet"><h4><i></i>目標設定シート</h4><dl><dt>目的</dt><dd>講師と同じ方向を向く。受講生さんが求めていることを汲み取る</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>初回ミーティングの課題。中間の見直しと卒業で振り返る</dd></dl></div>
+          <div class="sheet"><h4><i></i>コンセプトワーク設計シート</h4><dl><dt>目的</dt><dd>アカウントの軸を決めて、全体像をつくる</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>3〜4週目（早ければこのあたり）</dd></dl></div>
+          <div class="sheet"><h4><i></i>振り返りシート</h4><dl><dt>目的</dt><dd>目標に対して、今どこにいるかを確認する</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>毎月</dd></dl></div>
+          <div class="sheet"><h4><i></i>台本添削シート</h4><dl><dt>目的</dt><dd>投稿の台本を添削する</dd><dt>書く人</dt><dd>受講生さんが台本を書き、<b>講師が添削する</b></dd><dt>使い方</dt><dd>講師に添削してほしい台本は、このシートに書いてもらう。講師はこのシートを見て添削する（第11章）</dd></dl></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch11">
+        <div class="ch-head"><span class="no">CHAPTER 11</span><h3>チャットと添削</h3><p class="sum">添削はLINEで届きます。台本は台本添削シートに書いてもらいます（第10章）。どちらも24時間以内に、次の型で返します。</p></div>
+        <div class="recipe">
+          <ol>
+            <li><span class="rn en">1</span><div><h4>出したことへの一言</h4><p>「提出ありがとうございます！忙しい中でよく作りましたね」</p></div></li>
+            <li><span class="rn en">2</span><div><h4>よかった点（どこが・なぜよいか）</h4><p>「いいですね」で終わらせず、具体的に。前回より伸びた点があれば必ず伝える。</p></div></li>
+            <li><span class="rn en">3</span><div><h4>直す点（最大3つ）</h4><p>それぞれ「なぜ直すか」と「どう直すか」をセットで書く。</p></div></li>
+            <li><span class="rn en">4</span><div><h4>次にやること（1つ）</h4><p>受講生さんがすぐ動けるように、次の一歩を1つだけ示す。</p></div></li>
+          </ol>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>添削は上の4つの順番で書く。講師によって書き方を変えない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>チャットの返信は、質問への答えに「次にやること」を1つ添える。長くなるときは箇条書きにする。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>ジャンルの方向転換など、判断が分かれる添削は、返す前に講師責任者に相談する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>答えをすぐ渡す前に「どう思う？」と聴き、受講生さんが自分で考える機会をつくる。<span class="tag rec">推奨</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch12">
+        <div class="ch-head"><span class="no">CHAPTER 12</span><h3>グルコン</h3><p class="sum">月4回のグループコンサルです。進行は講師責任者が行います。講師の役割は、担当の受講生さんにできるだけ参加してもらうことです。</p></div>
+        <div class="gc">
+          <div><span class="c en">2<small>回 / 月</small></span><h4>作業会</h4><p>みんなで集まって作業する。一人だと手が止まる人に勧める。</p></div>
+          <div><span class="c en">1<small>回 / 月</small></span><h4>スレッズのシェア会</h4><p>スレッズの投稿をシェアし合う。</p></div>
+          <div><span class="c en">1<small>回 / 月</small></span><h4>セミナー</h4><p>初心者と経験者が一緒に参加する。テーマはインスタ発信で売上につなげること。</p></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>個別ミーティングの中で、次のグルコンの日程を案内し、参加を勧める。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>初めての受講生さんには「聞くだけでも大丈夫」と伝える。<span class="tag rec">推奨</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>初案件・初売上などの節目は、本人の了解を得てグルコンや講師定例で共有する。<span class="tag rec">推奨</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch13">
+        <div class="ch-head"><span class="no">CHAPTER 13</span><h3>気づいて声をかける</h3><p class="sum">「悩んでいるな」と気づいて声をかけることを、全員が同じようにできるように、見るべきサインとかける言葉を決めておきます。</p></div>
+        <div class="signs">
+          <div class="sign"><h4>返信が遅くなった・既読がつかない</h4><p>「最近どうですか？忙しい時期なら、今週はこれだけやれば大丈夫です」</p></div>
+          <div class="sign"><h4>タスクが2週続けて終わっていない</h4><p>「今、何か止まっていることはありますか？一緒に分けて考えましょう」</p></div>
+          <div class="sign"><h4>投稿が止まった</h4><p>「投稿、少しお休み中ですね。どこで手が止まっているか教えてもらえますか？」</p></div>
+          <div class="sign"><h4>メッセージが短くなった・元気がない</h4><p>「最近がんばりすぎていませんか？次のミーティングで、今の気持ちも聞かせてくださいね」</p></div>
+        </div>
+        <p class="note">サインは講師定例で気づいたものを足していきます。サインに気づいて声をかけても変わらないときは、講師責任者に共有します（第6章）。</p>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>受講生さんからの連絡が<b>2週間</b>途絶えたら、課題の催促ではなく、様子を気遣う連絡を講師から送る。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>家庭や体調の事情で動けないときは、まず気遣う。課題の話はしない。再開の目安だけ一緒に決める。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>休会の期間は受講生さんが決める。申し込みは、公式LINE（Lステップ）のリッチメニューにあるフォームから行ってもらう。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>休会期間が終わったら、<b>できる限りそのタイミングで</b>講師からLINEで声をかける。<span class="tag must">必須</span></p><p class="nt">返事がない場合に何回・いつまで声をかけ、どこで運営に引き継ぐか：<span class="tag tbd" style="margin-left:0">要確認</span></p></div></div>
+        </div>
+      </section>
+
+      <!-- ===================== PART 4 ===================== -->
+      <div class="part-head"><span class="pl">PART 4</span><h2>チーム編</h2><p>講師同士で品質をそろえ、マニュアルを育てていくための決まりです。</p></div>
+
+      <section class="ch" id="ch14">
+        <div class="ch-head"><span class="no">CHAPTER 14</span><h3>講師定例とルールの決め直し</h3><p class="sum">このマニュアルの基準は、講師責任者のやり方です。もっとよい方法が見つかったら、講師定例で話し合って決め直します。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">EVERY WEEK</span><h4>講師定例で話すこと</h4><ul><li>キャンセル率（クーリングオフのキャンセル率。欠席の割合ではない）</li><li>担当の受講生さんの状況</li><li>対応に迷った場面と、その対応</li><li>3つの約束に沿ったよい対応の共有</li></ul></div>
+          <div class="box"><span class="lb">UPDATE</span><h4>ルールを変えるとき</h4><ul><li>講師が変えたほうがよいと思ったら、講師定例で提案する</li><li>講師同士で話し合い、講師責任者が決める</li><li>決まったことは、このマニュアルに書き足す</li><li>マニュアルが変わるまでは、今のルールで動く</li></ul></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>講師定例は週1回、参加必須（第4章 第8条）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>【必須】の項目は、講師の判断で変えない。変えたいときは講師定例で提案する。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch15">
+        <div class="ch-head"><span class="no">CHAPTER 15</span><h3>新しい講師の最初の1週間</h3><p class="sum">マニュアルを読み、初回ミーティングを1回見学し、流れを説明できるようになったら担当を持てます。</p></div>
+        <div class="days">
+          <div class="day"><span class="dn">STEP 1</span><h4>マニュアルを熟読する</h4><p>第1章から付録まで全部。特に第3章・第4章・第7章。</p></div>
+          <div class="day"><span class="dn">STEP 2</span><h4>初回ミーティングを見学する</h4><p>講師責任者の初回ミーティングを1回見学する。</p></div>
+          <div class="day"><span class="dn">STEP 3</span><h4>流れを説明できるようにする</h4><p>初回ミーティングの流れと、最初の4週の流れを自分の言葉で話せる。</p></div>
+          <div class="day goal"><span class="dn">GOAL</span><h4>担当を持つ</h4><p>下のチェックがすべて埋まったら、講師責任者と確認して担当開始。</p></div>
+        </div>
+        <div class="checks" data-key="hh-onboard">
+          <div class="grp">担当を持つ前のチェック</div>
+          <label><input type="checkbox" id="ob1"><span>マニュアルを最後まで読んだ</span></label>
+          <label><input type="checkbox" id="ob2"><span>3つの約束と、それぞれの「一番大事にすること」を言える</span></label>
+          <label><input type="checkbox" id="ob3"><span>返信6時間・添削24時間・夜と休日は翌朝から、を覚えた</span></label>
+          <label><input type="checkbox" id="ob4"><span>初回ミーティングを1回見学した</span></label>
+          <label><input type="checkbox" id="ob5"><span>初回ミーティング資料の「講師紹介」ページを自分の内容にした</span></label>
+          <label><input type="checkbox" id="ob6"><span>最初の4週の流れ（初回ミーティング→動画の練習→競合リサーチ→コンセプトワーク）を説明できる</span></label>
+          <label><input type="checkbox" id="ob7"><span>週1回の個別ミーティングの4つの順番を説明できる</span></label>
+          <label><input type="checkbox" id="ob8"><span>すぐ報告することと、報告先を知っている</span></label>
+        </div>
+        <div class="check-foot"><span>チェック <b class="cnt" data-for="hh-onboard">0 / 8</b>（この端末にだけ保存されます）</span><button class="reset" type="button" data-reset="hh-onboard">チェックを外す</button></div>
+      </section>
+
+      <section class="ch" id="leave">
+        <div class="ch-head"><span class="no">CHAPTER 16</span><h3>講師を辞めるとき</h3><p class="sum">途中で辞めるときも、最後まで責任を持って引き継ぎます。受講生さんが不安なく、新しい講師と向き合えるようにするためです。</p></div>
+        <div class="months">
+          <div class="mo key"><span class="when">1ヶ月前まで<small>辞める講師</small></span><span class="what">講師責任者の個人LINEに、辞めることを伝える。<span class="nt">最終日は、できる限り月末にする。</span></span></div>
+          <div class="mo"><span class="when">1〜2週間前まで<small>講師責任者</small></span><span class="what">新しい講師を決める。</span></div>
+          <div class="mo"><span class="when">新しい講師が決まったら<small>辞める講師</small></span><span class="what">受講生さんに、本人から伝える。<span class="nt">新しい講師の名前と、最初のレッスンの予定を一緒に伝える。</span></span></div>
+          <div class="mo"><span class="when">1週間前まで<small>辞める講師</small></span><span class="what">引き継ぎシートを出す（5つのシート＋受講生さんごとの状況メモ）。</span></div>
+          <div class="mo"><span class="when">最終日まで<small>辞める講師・新しい講師</small></span><span class="what">辞める講師は、すべてのレッスンを担当する。<span class="nt">新しい講師は、間に合えばレッスンに立ち会う。難しければ録画を見る。</span></span></div>
+          <div class="mo key"><span class="when">最終日<small>辞める講師</small></span><span class="what">受講生さんのデータへのアクセス権を返す。</span></div>
+          <div class="mo"><span class="when">翌月から<small>新しい講師</small></span><span class="what">担当を始める。顔合わせは、新しい講師だけで行う。</span></div>
+        </div>
+        <div class="bracket">
+          <div class="box"><span class="lb">HANDOVER</span><h4>引き継ぎシートの項目</h4><ul><li>名前、コース、受講開始日と終了日</li><li>目標（目標設定シートの要点）</li><li>今どの段階か（第7章の1年の流れのどこか）</li><li>最近のタスクと進み具合</li><li>つまずいていること、悩んでいること</li><li>性格、連絡の好み、気をつけてほしいこと</li><li>今の成果（フォロワー数、初売上など）</li><li>返信していない質問、添削中の課題</li><li>次のレッスンの予定</li></ul></div>
+          <div class="box"><span class="lb">MESSAGE</span><h4>受講生さんへの伝え方</h4><div class="ex"><span class="lb">文例</span><p>「○○さん、いつもありがとうございます。○月○日で講師を退任することになりました。○月からは△△講師が担当します。○○さんの目標や今の進み具合は、△△講師にしっかり引き継いでいるので安心してくださいね。最初のレッスンは○月○日○時の予定です。最終日まで、全力で伴走します！」</p></div></div>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>辞めるときは、最終日の<b>1ヶ月前まで</b>に講師責任者の個人LINEに伝える。最終日は、できる限り月末にする。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>最終日までは、すべてのレッスンと連絡を、今までどおり担当する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>新しい講師は、講師責任者が最終日の1〜2週間前までに決める。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>受講生さんには、新しい講師が決まってから、辞める講師本人が伝える。新しい講師の名前と、最初のレッスンの予定を一緒に伝える。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>引き継ぎシートは、最終日の<b>1週間前まで</b>に出す。5つのシートと、受講生さんごとの状況メモは必ず引き継ぐ。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>新しい講師は、間に合えば最終日までのレッスンに立ち会う。難しければ録画を見て、受講生さんの様子をつかんでおく。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第7条</span><div class="ab"><p>新しい講師との顔合わせ（最初のレッスン）は、新しい講師だけで行う。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第8条</span><div class="ab"><p>報酬は次のとおり（第17章・第18章）。<span class="tag must">必須</span></p><ul><li>最終月のLINE返信報酬は満額</li><li><b>引き継ぎ費用</b>：引き継いだ新しい講師にも、担当費用として<b>受講生さん1人につき5,000円</b>が発生する。引き継いだ翌月に支払う</li><li>辞めたあとに受講生さんが成果を出した場合、成果ボーナスは新しい講師に支払う</li></ul></div></div>
+          <div class="art"><span class="an">第9条</span><div class="ab"><p>辞めたあとは、次のことを守る。<span class="tag must">必須</span></p><ul><li>受講生さんに個人的に連絡しない（勧誘や引き抜きを含む）</li><li>シート、録画、LINEのやり取りを持ち出さない</li><li>最終日に、受講生さんのデータへのアクセス権を返す</li></ul></div></div>
+          <div class="art"><span class="an">第10条</span><div class="ab"><p>体調不良などで1ヶ月前に伝えられない場合は、講師責任者が受講生さんへの連絡と引き継ぎを代わりに行う。辞める講師は、できる範囲で引き継ぎシートだけは出す。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <!-- ===================== PART 5 ===================== -->
+      <div class="part-head"><span class="pl">PART 5</span><h2>報酬編</h2><p>実施した分をきちんとお支払いするための決まりです。全講師で同じルールを使います。</p></div>
+
+      <section class="ch" id="ch16">
+        <div class="ch-head"><span class="no">CHAPTER 17</span><h3>報酬の項目と金額</h3><p class="sum">報酬は、この章と第18章にある項目だけです。ここにない項目は、請求する前に講師責任者へ相談してください。</p></div>
+        <div class="nums">
+          <div class="numc"><span class="lb">レッスン 1コマ40分</span><span class="v"><span class="en">750–2,000</span><small>円</small></span><span class="d">ランクで決まる</span></div>
+          <div class="numc"><span class="lb">担当費用</span><span class="v"><span class="en">5,000</span><small>円</small></span><span class="d">受講生さん1人につき1回限り。引き継いだ講師にも発生</span></div>
+          <div class="numc"><span class="lb">LINE返信</span><span class="v"><span class="en">5,000</span><small>円 / 月</small></span><span class="d">講師1人につき毎月</span></div>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>項目</th><th>金額</th><th>支払いの単位</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">レッスン</td><td>750〜2,000円</td><td>1コマ（40分）ごと。録画の格納を確認できたもの</td></tr>
+              <tr><td class="okw">担当費用</td><td>5,000円</td><td>受講生さん1人につき1回限り。講師が辞めて引き継いだ場合は、新しい講師にも発生（引き継ぎ費用）</td></tr>
+              <tr><td class="okw">LINE返信</td><td>5,000円</td><td>講師1人につき毎月</td></tr>
+              <tr><td class="okw">正月ボーナス</td><td>レッスン単価の2倍</td><td>1月1日〜3日に実施したレッスン</td></tr>
+              <tr><td class="okw">作業会・シェア会・セミナー</td><td>担当者に個別に案内</td><td>担当者1人、1回ごと</td></tr>
+              <tr><td class="okw">成果ボーナス</td><td>2,000〜5,000円</td><td>達成ごと（第18章）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>1コマの単価</th><th>ランクの目安</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">750円</td><td>見習い期間（3ヶ月）。徐々に担当を増やしていく</td></tr>
+              <tr><td class="okw">1,000円</td><td>一人で担当を持てる。受講生さんからの不満などがない</td></tr>
+              <tr><td class="okw">1,250円</td><td>成果を出した受講生さんが1名以上いる。受講生さんごとに指導を変えられる</td></tr>
+              <tr><td class="okw">1,500円</td><td>伸び悩みなどの難しいケースを任せられる。セミナーや作業会に人を巻き込む力がある</td></tr>
+              <tr><td class="okw">2,000円</td><td>ノウハウを言語化して他の講師に移植できる。セミナー担当などができる</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>レッスンは<b>1コマ40分</b>。予定は1時間枠で組み、残りの15〜20分は録画の格納などの作業に使う（第9章 第5条）。できる限り40分で1コマを終わらせるように努める。40分を超えても1コマとして請求する。延長分の追加請求はできない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>レッスンは必ず録画し、<b>終わり次第すぐに格納する</b>。<b>録画が格納されていることを確認できたレッスン1件ごとに</b>、1コマ分の報酬を支払う。録画が確認できないレッスンは支払いの対象外。<span class="tag must">必須</span><span class="tag tbd">要確認：録画の格納先と確認のしかた</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>レッスンは週1回が基準。2週に1回にするのは、受講生さんが希望し、講師責任者が承認した場合だけ。理由をシートに残す。<span class="tag tbd">要確認</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>支払いの対象は、実施したレッスンだけ。実施しなかった回と、受講生さんの都合でキャンセルになった回は対象外（第4章 第7条）。<span class="tag must">必須</span></p><p>だからこそ、キャンセルにならない工夫を<b>講師自身が考えて実行する</b>。当日朝のリマインド（第4章 第6条）に加えて、受講生さんに合った声かけを続ける。<span class="tag must">必須</span></p><p class="nt">工夫の例：日程を決めるときに受講生さんの予定を一緒に確認する／都合が悪くなったら早めに連絡してもらうよう伝えておく／レッスンで何をするかを前もって伝え、参加したくなる理由をつくる。</p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>講師定例は報酬の対象外。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>担当費用は、受講生さん1人につき1回だけ請求する。<span class="tag must">必須</span><span class="tag tbd">要確認：支払う時期、クーリングオフ・途中解約の場合の扱い</span></p><p class="nt">講師が辞めて担当が代わった場合は、引き継いだ新しい講師にも担当費用（引き継ぎ費用）として受講生さん1人につき5,000円を、引き継いだ翌月に支払う（第16章 第8条）。</p></div></div>
+          <div class="art"><span class="an">第7条</span><div class="ab"><p>ランクは3ヶ月に1回査定する。上の目安に加えて、返信（6時間以内）、講師定例への参加、タスク管理シートの記入を確認する。<span class="tag tbd">要確認：確認項目</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch17">
+        <div class="ch-head"><span class="no">CHAPTER 18</span><h3>成果ボーナス</h3><p class="sum">受講生さんの成果を、講師の報酬にも反映します。講師責任者が証拠を確認してから支払います。</p></div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>受講生さんの成果</th><th>講師へのボーナス</th></tr></thead>
+            <tbody>
+              <tr><td>フォロワー1,000人突破</td><td class="okw">2,000円</td></tr>
+              <tr><td>フォロワー5,000人突破</td><td class="okw">3,000円</td></tr>
+              <tr><td>フォロワー1万人突破</td><td class="okw">5,000円</td></tr>
+              <tr><td>初売上（1万円以上）</td><td class="okw">5,000円</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>対象は受講期間中の達成だけ。受講生さん1人につき、各項目1回まで。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>受講開始時のフォロワー数を記録する。開始時にすでに超えているラインは対象外。買ったフォロワーも対象外。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>初売上は、受講開始後にSNS経由で1万円以上の入金が初めてあった場合。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>フォロワー数や入金の画面を、受講生さんの了解を得て提出する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>ボーナスのために受講生さんに無理をさせない。成果や金額を約束しない（第5章）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>講師が辞めたあとに受講生さんが成果を出した場合は、新しい講師に支払う（第16章）。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch18">
+        <div class="ch-head"><span class="no">CHAPTER 19</span><h3>請求書の出し方</h3><p class="sum">講師責任者の確認でOKが出てから、<b>請求書提出専用のチャットワーク</b>に提出します。レッスンは1コマずつではなく、「レッスン費用」としてまとめて書きます。</p></div>
+        <div class="flow">
+          <div class="st"><span class="who">講師</span><span class="what">その月に実施したレッスンを講師責任者に伝える</span></div>
+          <div class="st hl"><span class="who">講師責任者</span><span class="what">録画の格納を確認し、実施日とコマ数をすべて突き合わせる。問題がなければOKを出す</span></div>
+          <div class="st"><span class="who">講師</span><span class="what">OKが出たら、請求書提出専用のチャットワークに請求書を出す</span></div>
+          <div class="st"><span class="who">会社</span><span class="what">請求書を受け取り、支払う</span></div>
+        </div>
+        <a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1NZvqMpFYGCeKTXPGU3-cDjJJvWXjv4zC8GNiwKDgBAo/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic" aria-hidden="true">¥</span><span class="tx"><span class="t">請求書のひな型を開く</span><span class="d">Googleスプレッドシートが開きます。請求書はこのひな型で作ります<br><b>※ 必ずコピーをして利用してください。</b></span></span><span class="go">開く ↗</span></a>
+        <div class="box"><span class="lb">INVOICE 1</span><h4>レッスン</h4></div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>項目</th><th>1レッスンの単価</th><th>格納した録画の本数</th><th>金額</th><th>備考</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">レッスン費用</td><td>例）1,500円</td><td>例）40本</td><td>60,000円</td><td></td></tr>
+              <tr><td class="okw">レッスン費用</td><td>例）3,000円（1,500円×2）</td><td>例）2本</td><td>6,000円</td><td>お正月</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box"><span class="lb">INVOICE 2</span><h4>そのほかの報酬・経費</h4></div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>項目</th><th>書くこと</th><th>単価</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">担当費用</td><td>新しく担当した受講生さんの名前（引き継いだ場合は「引き継ぎ」と書く）</td><td>5,000円</td></tr>
+              <tr><td class="okw">LINE返信</td><td>対象月</td><td>5,000円</td></tr>
+              <tr><td class="okw">作業会・シェア会・セミナー</td><td>実施日</td><td>個別に案内した金額</td></tr>
+              <tr><td class="okw">成果ボーナス</td><td>受講生さんの名前、達成した項目、達成日、証拠</td><td>第18章のとおり</td></tr>
+              <tr><td class="okw">経費</td><td>承認を得た日、内容（領収書を添付）</td><td>実費</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>請求書は、<a href="https://docs.google.com/spreadsheets/d/1NZvqMpFYGCeKTXPGU3-cDjJJvWXjv4zC8GNiwKDgBAo/edit?usp=sharing" target="_blank" rel="noopener">請求書のひな型</a>を<b>必ずコピーして</b>作り、講師責任者のOKが出てから、請求書提出専用のチャットワークに提出する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>レッスンは「レッスン費用」として、<b>1レッスンの単価 × 格納した録画の本数</b>で書く。お正月（1月1日〜3日）の分は別の行に書き、備考に「お正月」と書く。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>請求書に書いていない項目は支払わない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>経費は、事前に講師責任者の承認を得たものだけ請求できる。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>講師責任者自身の請求は、社長が確認する。<span class="tag tbd">要確認</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>請求書の締め日、提出日、支払日。<span class="tag tbd">要確認</span></p></div></div>
+        </div>
+      </section>
+
+      <!-- ===================== 付録 ===================== -->
+      <div class="part-head"><span class="pl">APPENDIX</span><h2>付録</h2></div>
+
+      <section class="ch" id="check">
+        <div class="ch-head"><span class="no">APPENDIX A</span><h3>品質セルフチェック</h3><p class="sum">週に1回、自分の対応を振り返ります。チェックが付かない項目は、次の講師定例で共有します。</p></div>
+        <div class="checks" data-key="hh-self">
+          <div class="grp">約束1　ひとりにしません</div>
+          <label><input type="checkbox" id="sc1"><span>すべてのチャットに6時間以内に返信した</span></label>
+          <label><input type="checkbox" id="sc2"><span>すぐ答えられない質問にも、まず期限を伝えて返した</span></label>
+          <label><input type="checkbox" id="sc3"><span>連絡が途絶えている受講生さんに、自分から声をかけた</span></label>
+          <div class="grp">約束2　とことん伴走します</div>
+          <label><input type="checkbox" id="sc4"><span>すべての添削を24時間以内に、添削の型で返した</span></label>
+          <label><input type="checkbox" id="sc5"><span>よかった点にも直す点にも、理由を添えた</span></label>
+          <label><input type="checkbox" id="sc6"><span>タスク管理シートに、次のタスクを全員分書いた</span></label>
+          <div class="grp">約束3　できたことを一緒に喜びます</div>
+          <label><input type="checkbox" id="sc7"><span>提出物に「前よりできるようになったこと」を1つ伝えた</span></label>
+          <label><input type="checkbox" id="sc8"><span>ほかの受講生さんと比べる言い方をしなかった</span></label>
+          <div class="grp">ルール</div>
+          <label><input type="checkbox" id="sc9"><span>個別ミーティングの当日朝にリマインドを送った</span></label>
+          <label><input type="checkbox" id="sc10"><span>すぐ報告することを、その日のうちに講師責任者に伝えた</span></label>
+          <label><input type="checkbox" id="sc11"><span>「収益化」など言い換える言葉を使わなかった</span></label>
+        </div>
+        <div class="check-foot"><span>チェック <b class="cnt" data-for="hh-self">0 / 11</b>（この端末にだけ保存されます）</span><button class="reset" type="button" data-reset="hh-self">チェックを外す</button></div>
+      </section>
+
+      <section class="ch" id="card">
+        <div class="ch-head"><span class="no">APPENDIX B</span><h3>講師カード</h3><p class="sum">いつも手元に置いておく1枚です。迷ったらここに戻ります。</p></div>
+        <div class="card">
+          <div class="hd"><span class="en">HASH HACK INSTRUCTOR CARD</span><span>講師カード</span></div>
+          <p class="mis">キャリアを一度手放したママの<br>セカンドキャリアを作る</p>
+          <ol>
+            <li><b>1. ひとりにしません</b><span>必ず返信。すぐ答えられないときは「○日○時までに返します」</span></li>
+            <li><b>2. とことん伴走します</b><span>添削は具体的に。よかった点も直す点も理由と一緒に</span></li>
+            <li><b>3. できたことを一緒に喜びます</b><span>前よりできるようになったことを1つ伝える</span></li>
+          </ol>
+          <div class="rules"><span>返信 6時間</span><span>添削 24時間</span><span>夜・休日は翌朝から</span><span>リマインド 当日朝</span><span>レッスンは1時間枠・録画はすぐ格納</span><span>迷ったら講師責任者へ</span></div>
+        </div>
+      </section>
+
+      <footer>
+        <span>HASH HACK 講師マニュアル　2026年11月版</span>
+        <span>内容の変更は講師定例で話し合い、講師責任者が決めます（第14章）。</span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  // 目次（スマホ）
+  var btn = document.getElementById('menuBtn');
+  var side = document.getElementById('side');
+  function closeNav() { document.body.classList.remove('nav-open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function () {
+    var open = document.body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  side.addEventListener('click', function (e) { if (e.target.closest('a')) closeNav(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+  // 読んでいる章を目次で示す
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove('on'); });
+        var a = byId[en.target.id];
+        if (a) a.classList.add('on');
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+
+  // チェックリスト（この端末にだけ保存）
+  function load(key) { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { return {}; } }
+  function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+  document.querySelectorAll('.checks').forEach(function (box) {
+    var key = box.getAttribute('data-key');
+    var inputs = box.querySelectorAll('input[type=checkbox]');
+    var cnt = document.querySelector('.cnt[data-for="' + key + '"]');
+    var state = load(key);
+    function count() {
+      var n = 0; inputs.forEach(function (i) { if (i.checked) n++; });
+      if (cnt) cnt.textContent = n + ' / ' + inputs.length;
+    }
+    inputs.forEach(function (i) {
+      if (state[i.id]) i.checked = true;
+      i.addEventListener('change', function () { state[i.id] = i.checked; save(key, state); count(); });
+    });
+    var rb = document.querySelector('[data-reset="' + key + '"]');
+    if (rb) rb.addEventListener('click', function () { inputs.forEach(function (i) { i.checked = false; }); state = {}; save(key, state); count(); });
+    count();
+  });
+})();
+</script>
+</body>
+</html>
