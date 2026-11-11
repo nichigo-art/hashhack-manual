@@ -499,6 +499,45 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
   .pr { padding: 20px 18px; }
   .card { padding: 20px; }
 }
+
+/* ---------- スマホの調整 ---------- */
+@media (max-width: 720px) {
+  .tag { white-space: normal; }
+  .cover .lead { font-size: 12.5px; letter-spacing: .04em; }
+  .cover h1 .s1 { font-size: 15px; }
+  .cover h1 .s2 { font-size: 24px; }
+  .pr .goal { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .pr .goal .lb { justify-self: start; }
+  .card .mis br { display: none; }
+  /* 表はスマホではカード型に組み替える（見出しは各セルの左に出す） */
+  .tbl.stack { border: 0; overflow: visible; }
+  .tbl.stack table, .tbl.stack tbody, .tbl.stack tr, .tbl.stack td { display: block; width: 100%; }
+  .tbl.stack thead { display: none; }
+  .tbl.stack tr { border: 1px solid var(--pink-soft); border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+  .tbl.stack td { display: grid; grid-template-columns: 8.2em minmax(0, 1fr); gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: normal; }
+  .tbl.stack td:last-child { border-bottom: 0; }
+  .tbl.stack td::before { content: attr(data-label); font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .04em; line-height: 1.6; padding-top: 2px; }
+  .tbl.stack td:first-child { background: var(--tint-pk); }
+  .tbl.stack td:empty { display: none; }
+  /* シートの時期の表は横スクロールのまま、ヒントを出す */
+  .cal table { min-width: 520px; }
+  .cal .fig-t::after { content: "← 横にスクロール →"; margin-left: auto; font-family: var(--jp); font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  /* 1時間枠は縦に並べる */
+  .slot { grid-template-columns: minmax(0, 1fr); }
+  .ruler { display: none; }
+  /* 返信の図は文字を少し小さく */
+  .track { font-size: 11.5px; }
+  .track > span { padding: 7px 8px; }
+  /* 請求書ボタン */
+  .linkbtn { flex-wrap: wrap; padding: 16px; }
+  .linkbtn .ic { display: none; }
+  .linkbtn .tx { flex-basis: 100%; }
+  .linkbtn .go { margin-left: auto; padding: 6px 18px; }
+  /* 成果ボーナスの別枠 */
+  .extra { flex-wrap: wrap; gap: 4px 10px; }
+  .extra b.yen { margin-left: 0; }
+  .road .yen { font-size: 17px; }
+}
 @media (max-width: 420px) {
   .weeks, .steps, .days, .nums { grid-template-columns: minmax(0, 1fr); }
 }
@@ -1170,6 +1209,17 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
 
 <script>
 (function () {
+  // 表：スマホでカード型にするため、各セルに列の見出しを付ける
+  document.querySelectorAll('.tbl').forEach(function (t) {
+    if (t.closest('.cal')) return;
+    var heads = Array.prototype.map.call(t.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+    if (!heads.length) return;
+    t.classList.add('stack');
+    t.querySelectorAll('tbody tr').forEach(function (tr) {
+      Array.prototype.forEach.call(tr.children, function (td, i) { td.setAttribute('data-label', heads[i] || ''); });
+    });
+  });
+
   // 目次（スマホ）
   var btn = document.getElementById('menuBtn');
   var side = document.getElementById('side');
