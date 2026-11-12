@@ -158,6 +158,13 @@ main { min-width: 0; padding-block: 28px 96px; }
 .how .lb { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .1em; }
 .how p { font-size: 13px; line-height: 1.75; }
 
+/* よく使うリンク */
+.quick { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.quick .lb { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .1em; margin-right: 4px; }
+.quick a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 13px; font-weight: 700; color: #fff; background: var(--pink); border-radius: 999px; padding: 7px 16px; box-shadow: 0 2px 5px rgba(0,0,0,.2); transition: transform .2s, box-shadow .2s; }
+.quick a:hover { transform: translateY(3px); box-shadow: none; }
+.quick a::after { content: "↗"; font-size: 12px; }
+
 /* ---------- 部の扉 ---------- */
 .part-head { margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--line); position: relative; display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
 .part-head::before { content: ""; position: absolute; top: -1px; left: 0; width: 120px; height: 3px; background: var(--grad); }
@@ -639,6 +646,8 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
         <a href="#ch4"><span class="k">RULES</span><span class="t">基本ルール</span><span class="d">返信・添削の期限、ミーティング、連絡の方法</span></a>
       </div>
 
+      <div class="quick"><span class="lb">よく使うシート</span><a href="https://docs.google.com/spreadsheets/d/1v3UuDoPz9cs9PH8-6B2lBf3NmQiFokUuq3dOhCmqOQA/edit?usp=sharing" target="_blank" rel="noopener">進捗管理シート</a><a href="https://docs.google.com/spreadsheets/d/1NZvqMpFYGCeKTXPGU3-cDjJJvWXjv4zC8GNiwKDgBAo/edit?usp=sharing" target="_blank" rel="noopener">請求書のひな型</a></div>
+
       <div class="how">
         <div><span class="lb">いつ読む</span><p>担当を持つ前に全部。初回ミーティングの前に第3章・第8章をもう一度。</p></div>
         <div><span class="lb">印の意味</span><p><span class="tag must" style="margin-left:0">必須</span> 全員が必ず守る　<span class="tag rec" style="margin-left:0">推奨</span> 受講生さんに合わせて変えてよい</p></div>
@@ -968,12 +977,14 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       <section class="ch" id="ch14">
         <div class="ch-head"><span class="no">CHAPTER 14</span><h3>講師定例とルールの決め直し</h3><p class="sum">このマニュアルの基準は、講師責任者のやり方です。もっとよい方法が見つかったら、講師定例で話し合って決め直します。</p></div>
         <div class="bracket">
-          <div class="box"><span class="lb">EVERY WEEK</span><h4>講師定例で話すこと</h4><ul><li>キャンセル率（クーリングオフのキャンセル率。欠席の割合ではない）</li><li>担当の受講生さんの状況</li><li>対応に迷った場面と、その対応</li><li>3つの約束に沿ったよい対応の共有</li></ul></div>
+          <div class="box"><span class="lb">EVERY WEEK</span><h4>講師定例で話すこと</h4><ul><li>キャンセル率（クーリングオフのキャンセル率。欠席の割合ではない）</li><li>担当の受講生さんの状況（進捗管理シートを見ながら）</li><li>対応に迷った場面と、その対応</li><li>3つの約束に沿ったよい対応の共有</li></ul></div>
           <div class="box"><span class="lb">UPDATE</span><h4>ルールを変えるとき</h4><ul><li>講師が変えたほうがよいと思ったら、講師定例で提案する</li><li>講師同士で話し合い、講師責任者が決める</li><li>決まったことは、このマニュアルに書き足す</li><li>マニュアルが変わるまでは、今のルールで動く</li></ul></div>
         </div>
+        <a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1v3UuDoPz9cs9PH8-6B2lBf3NmQiFokUuq3dOhCmqOQA/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic" aria-hidden="true">✓</span><span class="tx"><span class="t">進捗管理シートを開く</span><span class="d">担当の受講生さんの進み具合を、講師全員で共有するシートです</span></span><span class="go">開く ↗</span></a>
         <div class="arts">
           <div class="art"><span class="an">第1条</span><div class="ab"><p>講師定例は週1回、参加必須（第4章 第8条）。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第2条</span><div class="ab"><p>【必須】の項目は、講師の判断で変えない。変えたいときは講師定例で提案する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>担当の受講生さんの状況は、<a href="https://docs.google.com/spreadsheets/d/1v3UuDoPz9cs9PH8-6B2lBf3NmQiFokUuq3dOhCmqOQA/edit?usp=sharing" target="_blank" rel="noopener">進捗管理シート</a>に記録する。講師定例では、このシートを見ながら共有する。<span class="tag must">必須</span><span class="tag tbd">要確認：記録するタイミング（毎回のレッスン後など）</span></p></div></div>
         </div>
       </section>
 
