@@ -449,6 +449,93 @@ td.okw { font-weight: 700; color: var(--ink); }
 .extra b.yen { font-family: var(--en); font-size: 20px; color: var(--pink); margin-left: auto; white-space: nowrap; }
 .flow.f3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
+/* ---------- 最初の5週間 ---------- */
+.weeks.w5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.wkmap { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.wkmap a { text-decoration: none; border-radius: 8px; background: var(--surface); border-top: 3px solid var(--pink-soft); padding: 10px 10px 9px; display: flex; flex-direction: column; gap: 2px; min-width: 0; transition: transform .2s; }
+.wkmap a:hover { transform: translateY(2px); }
+.wkmap .w { font-family: var(--en); font-weight: 700; font-size: 11px; letter-spacing: .18em; color: var(--blue); }
+.wkmap b { font-size: 13.5px; line-height: 1.5; }
+.wkmap small { font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+.wkmap a.last { background: var(--tint-pk); border-top-color: var(--pink); }
+.wk-badge { display: inline-flex; align-items: center; gap: 8px; }
+.ch-head .no.wkno { color: #fff; background: var(--blue); align-self: flex-start; border-radius: 999px; padding: 3px 12px 2px; letter-spacing: .2em; }
+/* 40分の流れ */
+.mtg { display: grid; grid-template-columns: minmax(0, 10fr) minmax(104px, 5fr) minmax(0, 18fr) minmax(104px, 5fr); border-radius: 10px; overflow: hidden; gap: 2px; background: var(--bg); }
+.mtg > div { background: var(--surface); padding: 10px 10px 9px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mtg > div.main { background: var(--tint-pk); }
+.mtg .m { font-family: var(--en); font-weight: 700; font-size: 18px; color: var(--pink); line-height: 1; }
+.mtg .m small { font-family: var(--jp); font-size: 11px; color: var(--ink); margin-left: 1px; }
+.mtg .t { font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.mtg .d { font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+/* 宿題の流れ（つながったブロック） */
+.chain { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 4px; }
+.chain li { display: flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.chain li span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px 4px; line-height: 1.5; }
+.chain li.g span { background: var(--pink); border-color: var(--pink); color: #fff; }
+.chain li.s span { background: var(--tint-bl); border-color: transparent; }
+.chain li:not(:last-child)::after { content: "→"; color: var(--pink-soft); font-weight: 700; padding: 0 2px; }
+.skip { font-size: 12.5px; color: var(--muted); }
+.skip s { text-decoration-color: var(--pink-soft); }
+/* CapCutの流れ */
+.cc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.cc li { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 2px 8px; min-width: 0; }
+.cc .n { grid-row: span 2; font-family: var(--en); font-weight: 700; font-size: 20px; color: var(--pink-soft); line-height: 1.2; }
+.cc b { font-size: 13.5px; line-height: 1.5; }
+.cc small { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.cc li.opt { border-style: dashed; background: var(--surface); }
+.cc li.opt .n { color: var(--muted); font-size: 12px; padding-top: 3px; }
+.cc li.key { border-color: var(--pink-soft); background: var(--tint-pk); }
+/* スマホ画面の図 */
+.phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 28px; }
+.pf { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.phone { width: 116px; aspect-ratio: 9 / 16; border-radius: 16px; border: 3px solid var(--ink); position: relative; overflow: hidden; background: linear-gradient(180deg, #e9dfe3 0%, #d7c6cd 100%); }
+.phone::before { content: ""; position: absolute; left: 22%; right: 22%; top: 36%; height: 30%; border-radius: 50%; background: rgba(152,102,119,.35); }
+.phone .cap { position: absolute; left: 8%; right: 8%; background: #fff; color: #3a3035; font-size: 10px; font-weight: 700; text-align: center; border-radius: 4px; padding: 3px 2px; line-height: 1.3; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.phone.top .cap { top: 9%; }
+.phone.mid .cap { top: 44%; }
+.phone .eye { position: absolute; right: 6px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--blue); }
+.pf .lb { font-size: 12.5px; font-weight: 700; color: var(--ink); text-align: center; line-height: 1.5; }
+.pf .lb i { font-style: normal; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; color: #fff; font-size: 12px; margin-right: 4px; }
+.pf .lb .o { background: var(--ok); }
+.pf .lb .x { background: var(--muted); }
+.pf small { font-size: 11.5px; color: var(--muted); text-align: center; max-width: 150px; line-height: 1.6; }
+/* テロップの複製 */
+.clips { display: flex; flex-direction: column; gap: 10px; }
+.clips .row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; align-items: center; }
+.clips .row > span { font-size: 12.5px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.clips .row > span small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; }
+.clips .cl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; max-width: 320px; }
+.clips .c { aspect-ratio: 9 / 12; border-radius: 6px; background: linear-gradient(180deg, #e9dfe3, #d7c6cd); position: relative; }
+.clips .c i { position: absolute; left: 10%; right: 10%; height: 14%; top: 43%; background: #fff; border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+.clips .bad .c:nth-child(1) i { top: 12%; left: 20%; right: 20%; }
+.clips .bad .c:nth-child(2) i { top: 55%; height: 20%; left: 4%; right: 4%; }
+.clips .bad .c:nth-child(3) i { top: 30%; height: 10%; left: 28%; right: 28%; }
+.clips .bad .c:nth-child(4) i { top: 70%; }
+/* ジェットカット */
+.jet { display: flex; flex-direction: column; gap: 10px; }
+.jet .row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; align-items: center; }
+.jet .row > span { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.jet .bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; }
+.jet .bar i { display: block; height: 100%; }
+.jet .bar .v { background: var(--pink); }
+.jet .bar .q { background: var(--surface); background-image: repeating-linear-gradient(135deg, transparent 0 5px, rgba(0,0,0,.07) 5px 10px); }
+.jet .leg { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); }
+.jet .leg i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+.cheer { border-radius: 12px; background: linear-gradient(135deg, var(--tint-pk), var(--tint-bl)); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.cheer .lb { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .12em; }
+.cheer p { font-family: var(--maru); font-size: 15.5px; font-weight: 700; color: var(--ink); line-height: 1.9; }
+@media (max-width: 720px) {
+  .weeks.w5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wkmap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mtg { grid-template-columns: minmax(0, 1fr); }
+  .mtg > div { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 2px 10px; }
+  .mtg .m { grid-row: span 2; padding-top: 2px; }
+  .cc { grid-template-columns: minmax(0, 1fr); }
+  .clips .row, .jet .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .phone { width: 100px; }
+}
+
 .note { font-size: 13px; color: var(--muted); background: var(--surface); border-radius: 10px; padding: 12px 16px; line-height: 1.8; }
 .note b { color: var(--ink); }
 
@@ -587,28 +674,38 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
         <span class="pl">PART 3</span><span class="pn">実務編</span>
         <ol>
           <li><a href="#ch7"><span class="n">07</span><span>受講生さんの1年の流れ</span></a></li>
-          <li><a href="#ch8"><span class="n">08</span><span>初回ミーティング</span></a></li>
-          <li><a href="#ch9"><span class="n">09</span><span>週1回の個別ミーティング</span></a></li>
-          <li><a href="#ch10"><span class="n">10</span><span>5つのシートの使い方</span></a></li>
-          <li><a href="#ch11"><span class="n">11</span><span>チャットと添削</span></a></li>
-          <li><a href="#ch12"><span class="n">12</span><span>グルコン</span></a></li>
-          <li><a href="#ch13"><span class="n">13</span><span>気づいて声をかける</span></a></li>
+          <li><a href="#ch9"><span class="n">08</span><span>週1回の個別ミーティング</span></a></li>
+          <li><a href="#ch10"><span class="n">09</span><span>5つのシートの使い方</span></a></li>
+          <li><a href="#ch11"><span class="n">10</span><span>チャットと添削</span></a></li>
+          <li><a href="#ch12"><span class="n">11</span><span>グルコン</span></a></li>
+          <li><a href="#ch13"><span class="n">12</span><span>気づいて声をかける</span></a></li>
         </ol>
       </div>
       <div class="part">
-        <span class="pl">PART 4</span><span class="pn">チーム編</span>
+        <span class="pl">PART 4</span><span class="pn">最初の5週間</span>
         <ol>
-          <li><a href="#ch14"><span class="n">14</span><span>講師定例とルールの決め直し</span></a></li>
-          <li><a href="#ch15"><span class="n">15</span><span>新しい講師の最初の1週間</span></a></li>
-          <li><a href="#leave"><span class="n">16</span><span>講師を辞めるとき</span></a></li>
+          <li><a href="#w0"><span class="n">★</span><span>全体像と共通のルール</span></a></li>
+          <li><a href="#ch8"><span class="n">W1</span><span>初回ミーティング</span></a></li>
+          <li><a href="#wk2"><span class="n">W2</span><span>動画作成の練習</span></a></li>
+          <li><a href="#wk3"><span class="n">W3</span><span>競合リサーチ</span></a></li>
+          <li><a href="#wk4"><span class="n">W4</span><span>コンセプト設計（前半）</span></a></li>
+          <li><a href="#wk5"><span class="n">W5</span><span>コンセプトとアカウント構築</span></a></li>
         </ol>
       </div>
       <div class="part">
-        <span class="pl">PART 5</span><span class="pn">報酬編</span>
+        <span class="pl">PART 5</span><span class="pn">チーム編</span>
         <ol>
-          <li><a href="#ch16"><span class="n">17</span><span>報酬の項目と金額</span></a></li>
-          <li><a href="#ch17"><span class="n">18</span><span>成果ボーナス</span></a></li>
-          <li><a href="#ch18"><span class="n">19</span><span>請求書の出し方</span></a></li>
+          <li><a href="#ch14"><span class="n">13</span><span>講師定例とルールの決め直し</span></a></li>
+          <li><a href="#ch15"><span class="n">14</span><span>新しい講師の最初の1週間</span></a></li>
+          <li><a href="#leave"><span class="n">15</span><span>講師を辞めるとき</span></a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <span class="pl">PART 6</span><span class="pn">報酬編</span>
+        <ol>
+          <li><a href="#ch16"><span class="n">16</span><span>報酬の項目と金額</span></a></li>
+          <li><a href="#ch17"><span class="n">17</span><span>成果ボーナス</span></a></li>
+          <li><a href="#ch18"><span class="n">18</span><span>請求書の出し方</span></a></li>
         </ol>
       </div>
       <div class="part">
@@ -636,7 +733,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
         <div class="side-panel">
           <span class="script" aria-hidden="true">Manual</span>
           <div class="hashtags"><span>#3つの約束</span><span>#基本ルール</span><span>#実務の流れ</span><span>#チーム</span><span>#報酬</span></div>
-          <div class="meta"><span>全5部・19章</span><span>2026年11月版</span></div>
+          <div class="meta"><span>全6部・18章＋5週</span><span>2026年11月版</span></div>
         </div>
       </section>
 
@@ -649,7 +746,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       <div class="quick"><span class="lb">よく使うリンク</span><a href="https://docs.google.com/spreadsheets/d/1v3UuDoPz9cs9PH8-6B2lBf3NmQiFokUuq3dOhCmqOQA/edit?usp=sharing" target="_blank" rel="noopener">進捗管理シート</a><a href="https://docs.google.com/spreadsheets/d/1NZvqMpFYGCeKTXPGU3-cDjJJvWXjv4zC8GNiwKDgBAo/edit?usp=sharing" target="_blank" rel="noopener">請求書のひな型</a><a href="https://canva.link/2vjhz68akuf5qnl" target="_blank" rel="noopener">初回ミーティング資料（Canva）</a></div>
 
       <div class="how">
-        <div><span class="lb">いつ読む</span><p>担当を持つ前に全部。初回ミーティングの前に第3章・第8章をもう一度。</p></div>
+        <div><span class="lb">いつ読む</span><p>担当を持つ前に全部。初回ミーティングの前に第3章と「最初の5週間」をもう一度。</p></div>
         <div><span class="lb">印の意味</span><p><span class="tag must" style="margin-left:0">必須</span> 全員が必ず守る　<span class="tag rec" style="margin-left:0">推奨</span> 受講生さんに合わせて変えてよい</p></div>
         <div><span class="lb">迷ったら</span><p>一人で決めずに講師責任者へ相談（第6章）。<span class="tag tbd" style="margin-left:0">要確認</span>は運営で決定中の項目です。</p></div>
       </div>
@@ -676,7 +773,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="trait"><h4>受講生さんを一番に考える</h4><p>自分の都合ではなく、受講生さんのためになるかどうかで行動を決める。</p></div>
           <div class="trait"><h4>決まりごとをきちんと守る</h4><p>講師定例への参加や返信の期限など、受講生さんのための決まりを自分から守る。</p></div>
           <div class="trait"><h4>結果を出させてあげたいと思う</h4><p>「教えたら終わり」ではなく、受講生さんが結果を出すところまで意識して関わる。</p></div>
-          <div class="trait"><h4>悩みに気づいて声をかける</h4><p>「この人、今悩んでいるな」と気づいたら、自分から声をかけられる（第13章）。</p></div>
+          <div class="trait"><h4>悩みに気づいて声をかける</h4><p>「この人、今悩んでいるな」と気づいたら、自分から声をかけられる（第12章）。</p></div>
         </div>
       </section>
 
@@ -807,15 +904,17 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       <div class="part-head"><span class="pl">PART 3</span><h2>実務編</h2><p>担当を持ったら、いつ・何を・どう進めるか。基準は講師責任者のやり方です。</p></div>
 
       <section class="ch" id="ch7">
-        <div class="ch-head"><span class="no">CHAPTER 07</span><h3>受講生さんの1年の流れ</h3><p class="sum">コースは半年〜1年です。最初の1ヶ月は週ごとに進め方が決まっています。2ヶ月目からは、受講生さんのペースに合わせて進めます。</p></div>
-        <div class="weeks">
-          <div class="wk"><span class="w">WEEK 1</span><h4>初回ミーティング</h4><p>お互いの自己紹介。5つのシートをまとめたスプレッドシートを渡し、目標設定シートと自己紹介動画を課題にする。</p><span class="out">できること：<b>講師と同じ方向を向く</b></span></div>
-          <div class="wk"><span class="w">WEEK 2</span><h4>動画作成の練習</h4><p>上手な人の動画を選び、丸ごと真似して作る課題を出す。</p><span class="out">できること：<b>編集に慣れる</b></span></div>
-          <div class="wk"><span class="w">WEEK 3</span><h4>競合リサーチ</h4><p>だいたい決まったジャンルで、競合のアカウントを調べる。</p><span class="out">できること：<b>伸びている発信が分かる</b></span></div>
-          <div class="wk goal"><span class="w">WEEK 4</span><h4>コンセプトワーク</h4><p>コンセプトワーク設計シートで、アカウントの軸を決める。</p><span class="out">できること：<b>アカウントの全体像ができる</b></span></div>
+        <div class="ch-head"><span class="no">CHAPTER 07</span><h3>受講生さんの1年の流れ</h3><p class="sum">コースは半年〜1年です。最初の5週間は週ごとに進め方が決まっています（PART 4）。2ヶ月目からは、受講生さんのペースに合わせて進めます。</p></div>
+        <div class="weeks w5">
+          <div class="wk"><span class="w">WEEK 1</span><h4>初回ミーティング</h4><p>お互いの自己紹介。目標設定シートと自己紹介動画を課題にする。</p><span class="out">できること：<b>講師と同じ方向を向く</b></span></div>
+          <div class="wk"><span class="w">WEEK 2</span><h4>動画作成の練習</h4><p>再生1万回以上のリールを1本、丸ごと真似して作る。</p><span class="out">できること：<b>編集に慣れる</b></span></div>
+          <div class="wk"><span class="w">WEEK 3</span><h4>競合リサーチ</h4><p>同じジャンルで伸びている5アカウントを調べる。</p><span class="out">できること：<b>伸びている理由が分かる</b></span></div>
+          <div class="wk"><span class="w">WEEK 4</span><h4>コンセプト設計（前半）</h4><p>自分の棚卸しから、ペルソナの悩みの深掘りまで。</p><span class="out">できること：<b>誰に届けるかが分かる</b></span></div>
+          <div class="wk goal"><span class="w">WEEK 5</span><h4>コンセプトとアカウント構築</h4><p>2ヶ月目のはじめ。コンセプトを一文にまとめ、アカウントを形にする。</p><span class="out">できること：<b>アカウントの土台ができる</b></span></div>
         </div>
+        <p class="note">1〜5週目の進め方は、PART 4「最初の5週間」に週ごとにまとめています。</p>
         <div class="months">
-          <div class="mo"><span class="when">2ヶ月目</span><span class="what">投稿を始める。</span></div>
+          <div class="mo"><span class="when">2ヶ月目</span><span class="what">5週目でアカウント構築ができたら、投稿を始める。</span></div>
           <div class="mo"><span class="when">3ヶ月目</span><span class="what">売上につなげる準備を始める。<span class="nt">2〜3ヶ月目は伸び悩みやすい時期。どこを直せばいいかを、個別ミーティングでしっかり話す。</span></span></div>
           <div class="mo"><span class="when">毎月</span><span class="what">振り返りシートで、目標に対して今どこにいるかを一緒に確認する。</span></div>
           <div class="mo key"><span class="when">中間の見直し<small>半年：3ヶ月目<br>1年：3・6・9ヶ月目</small></span><span class="what">目標設定シートを一緒に見直し、次の3ヶ月の計画を立て直す。<span class="nt">実施方法は<span class="tag tbd" style="margin-left:2px">要確認</span></span></span></div>
@@ -824,48 +923,23 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
         </div>
       </section>
 
-      <section class="ch" id="ch8">
-        <div class="ch-head"><span class="no">CHAPTER 08</span><h3>初回ミーティング</h3><p class="sum">ゴールは、受講生さんが「この選択でよかった」「ワクワクする」と感じて終わること。1対1・約30分で、初回ミーティング資料を画面共有しながら、資料どおりに進めます。</p></div>
-        <a class="linkbtn" href="https://canva.link/2vjhz68akuf5qnl" target="_blank" rel="noopener"><span class="ic" aria-hidden="true">▶</span><span class="tx"><span class="t">初回ミーティング資料（Canva）を開く</span><span class="d">Canvaのテンプレートです。開くと自分用のコピーが作られます<br><b>※ 必ず自分用にコピーしてから書きかえてください。</b></span></span><span class="go">開く ↗</span></a>
-        <div class="bracket">
-          <div class="box"><span class="lb">BEFORE</span><h4>事前の準備</h4><ul><li>受講生さんを振り分けるときに、セールスマンから事前情報が届く。<b>必ず読み込んでおく</b></li><li>Canvaの初回ミーティング資料をコピーし、<b>表紙に受講生さんの名前</b>を入れる</li><li>「講師紹介」（7ページ）と「講師の自己紹介」（9ページ）を自分の内容に書き換え、写真を入れる</li><li>20ページの【半年／1年】を、受講生さんのコースに合わせる</li><li>なぜHASH HACKで講師をしているかを、1分で話せるようにしておく</li><li>5つのシートのスプレッドシートを、受講生さんの名前を入れて用意しておく</li></ul></div>
-          <div class="box"><span class="lb">AFTER</span><h4>終わったあと</h4><ul><li>当日中にお礼を送り、課題の内容と期限を文字でもう一度伝える</li><li>聞いたこと（始めた理由、使える時間、不安なこと）を記録する</li><li>気になる点があれば講師責任者に共有する</li></ul></div>
-        </div>
-        <div class="tbl">
-          <table>
-            <thead><tr><th>順番</th><th>内容</th><th>必ず伝えること</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>はじめに・理念・3つの約束</td><td>3つの約束を、講師自身の言葉で伝える</td></tr>
-              <tr><td>2</td><td>講師の自己紹介・受講生さんの自己紹介</td><td>講師から先に話す。受講生さんの「なぜ始めたか」を本人の口から聞く</td></tr>
-              <tr><td>3</td><td>サポートの説明</td><td>チャット・添削・グルコン・個別ミーティングの使い方と、1年の流れ</td></tr>
-              <tr><td>4</td><td>ワークと課題</td><td>目標設定シートと自己紹介動画（CapCut・20秒〜1分、完成したらLINEで送る）の目的と期限</td></tr>
-              <tr><td>5</td><td>最後に</td><td>「何かあったらいつでも連絡してね」と伝え、次にやることを確認する</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="arts">
-          <div class="art"><span class="an">第1条</span><div class="ab"><p>初回ミーティングは、初回ミーティング資料に沿って行う。資料の中身を講師が変えない。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第2条</span><div class="ab"><p>資料は<a href="https://canva.link/2vjhz68akuf5qnl" target="_blank" rel="noopener">Canvaのテンプレート</a>から自分用にコピーして使う。書きかえるのは、表紙の受講生さんの名前、講師紹介（7ページ）、講師の自己紹介（9ページ）、受講期間（20ページ）だけ。元のテンプレートは書きかえない。<span class="tag must">必須</span></p></div></div>
-        </div>
-      </section>
-
       <section class="ch" id="ch9">
-        <div class="ch-head"><span class="no">CHAPTER 09</span><h3>週1回の個別ミーティング</h3><p class="sum">Google Meetで1コマ40分。予定は1時間枠で組み、レッスン後の15〜20分は録画の格納などの作業に使います。毎回この順番で進めます。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 08</span><h3>週1回の個別ミーティング</h3><p class="sum">Google Meetで1コマ40分。予定は1時間枠で組み、レッスン後の15〜20分は録画の格納などの作業に使います。毎回この順番で進めます。最初の5週間は、PART 4の週ごとの流れで進めます。</p></div>
 
         <figure class="fig" style="margin:0">
           <figcaption class="fig-t">図：1回のレッスンは「1時間枠」</figcaption>
           <div class="slot">
             <div class="les"><div class="hd"><span>レッスン</span><b>40<small style="font-size:11px">分</small></b></div>
-              <ol><li>① 先週のタスク確認</li><li class="hl">② 悩み・現状を聞く</li><li>③ 課題のフィードバック</li><li>④ 次のタスクを書く</li></ol></div>
+              <ol><li>① 先週のタスク確認</li><li class="hl">② 今の進捗を聞く</li><li>③ 課題のフィードバック</li><li>④ 次のタスクを書く</li></ol></div>
             <div class="rec"><div class="hd"><span>作業</span><b>15〜20<small style="font-size:11px">分</small></b></div>
               <p><b>録画をすぐ格納</b>。そのほかの作業もここで</p></div>
           </div>
           <div class="ruler"><span>0分</span><span><span>40分</span><span>60分</span></span></div>
-          <p class="fig-n">録画が格納されていないレッスンは報酬の対象外です（第17章 第2条）。終わったらすぐ格納します。</p>
+          <p class="fig-n">録画が格納されていないレッスンは報酬の対象外です（第16章 第2条）。終わったらすぐ格納します。</p>
         </figure>
         <div class="steps">
           <div class="step"><span class="sn en">1</span><h4>先週のタスクの確認</h4><p>タスク管理シートを一緒に見て、できたものにチェックを入れる。</p></div>
-          <div class="step hl"><span class="sn en">2</span><h4>今の悩み・現状を聞く</h4><p>受講生さん本人の口から話してもらう時間をとる。</p></div>
+          <div class="step hl"><span class="sn en">2</span><h4>今の進捗を聞く</h4><p>「今の進捗はどうですか？」と聞き、受講生さん本人の口から話してもらう。</p></div>
           <div class="step"><span class="sn en">3</span><h4>課題へのフィードバック</h4><p>提出された課題に、よかった点と直す点を伝える。</p></div>
           <div class="step"><span class="sn en">4</span><h4>次のタスクを決める</h4><p>講師がタスク管理シートに書く。次回はここから確認する。</p></div>
         </div>
@@ -873,42 +947,42 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="art"><span class="an">第1条</span><div class="ab"><p>当日の朝にリマインドを送る（第4章 第6条）。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第2条</span><div class="ab"><p>上の4つの順番で進める。2の「本人の口から話してもらう時間」は省かない。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第3条</span><div class="ab"><p>次のタスクは講師がタスク管理シートに書く。受講生さんが「次に何をすればいいか」をすぐ分かる書き方にする。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第4条</span><div class="ab"><p>ミーティングの中で、グルコンへの参加を勧める（第12章）。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第5条</span><div class="ab"><p>レッスンは<b>1時間枠</b>で考える。40分のレッスンが終わったら、残りの15〜20分で録画の格納などの作業をする。<b>録画はレッスンが終わり次第すぐに格納する</b>（第17章 第2条）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>ミーティングの中で、グルコンへの参加を勧める（第11章）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>レッスンは<b>1時間枠</b>で考える。40分のレッスンが終わったら、残りの15〜20分で録画の格納などの作業をする。<b>録画はレッスンが終わり次第すぐに格納する</b>（第16章 第2条）。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第6条</span><div class="ab"><p>次回の日程は、ミーティングの中でお互いの都合を聞いて決める。<span class="tag tbd">検討中：受講生さんがカレンダーから予約する形に変える予定</span></p></div></div>
         </div>
       </section>
 
       <section class="ch" id="ch10">
-        <div class="ch-head"><span class="no">CHAPTER 10</span><h3>5つのシートの使い方</h3><p class="sum">5つのシートは1つのスプレッドシートにまとまっています。初回ミーティングで渡し、必要な時期に使います。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 09</span><h3>5つのシートの使い方</h3><p class="sum">5つのシートは1つのスプレッドシートにまとまっています。初回ミーティングで渡し、必要な時期に使います。</p></div>
         <a class="linkbtn" href="https://docs.google.com/spreadsheets/d/1v3UuDoPz9cs9PH8-6B2lBf3NmQiFokUuq3dOhCmqOQA/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic" aria-hidden="true">✓</span><span class="tx"><span class="t">進捗管理シートを開く</span><span class="d">受講生さんの進み具合を管理するシートです</span></span><span class="go">開く ↗</span></a>
         <div class="sheets">
           <div class="sheet main"><h4><i></i>タスク管理シート</h4><dl><dt>目的</dt><dd>受講生さんが、次に何をすればいいかをすぐ分かるようにする</dd><dt>書く人</dt><dd><b>講師が必ず書く</b></dd><dt>使う時期</dt><dd>毎週の個別ミーティング。次回、できたものにチェックを入れる</dd></dl></div>
           <div class="sheet"><h4><i></i>目標設定シート</h4><dl><dt>目的</dt><dd>講師と同じ方向を向く。受講生さんが求めていることを汲み取る</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>初回ミーティングの課題。中間の見直しと卒業で振り返る</dd></dl></div>
-          <div class="sheet"><h4><i></i>コンセプトワーク設計シート</h4><dl><dt>目的</dt><dd>アカウントの軸を決めて、全体像をつくる</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>3〜4週目（早ければこのあたり）</dd></dl></div>
+          <div class="sheet"><h4><i></i>コンセプトワーク設計シート</h4><dl><dt>目的</dt><dd>アカウントの軸を決めて、全体像をつくる</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>3週目：リサーチ欄（競合5アカウント）／4週目：自分の棚卸し〜ペルソナの悩みの深掘り／5週目：コンセプト〜アカウント構築</dd></dl></div>
           <div class="sheet"><h4><i></i>振り返りシート</h4><dl><dt>目的</dt><dd>目標に対して、今どこにいるかを確認する</dd><dt>書く人</dt><dd>受講生さん</dd><dt>使う時期</dt><dd>毎月</dd></dl></div>
-          <div class="sheet"><h4><i></i>台本添削シート</h4><dl><dt>目的</dt><dd>投稿の台本を添削する</dd><dt>書く人</dt><dd>受講生さんが台本を書き、<b>講師が添削する</b></dd><dt>使い方</dt><dd>講師に添削してほしい台本は、このシートに書いてもらう。講師はこのシートを見て添削する（第11章）</dd></dl></div>
+          <div class="sheet"><h4><i></i>台本添削シート</h4><dl><dt>目的</dt><dd>投稿の台本を添削する</dd><dt>書く人</dt><dd>受講生さんが台本を書き、<b>講師が添削する</b></dd><dt>使い方</dt><dd>講師に添削してほしい台本は、このシートに書いてもらう。講師はこのシートを見て添削する（第10章）</dd></dl></div>
         </div>
         <figure class="fig cal" style="margin:0">
           <figcaption class="fig-t">図：どのシートを、いつ使う？</figcaption>
           <div class="tbl">
           <table>
-            <thead><tr><th>シート</th><th>1週目</th><th>2週目</th><th>3週目</th><th>4週目</th><th>2ヶ月目〜</th><th>中間の見直し</th><th>卒業</th></tr></thead>
+            <thead><tr><th>シート</th><th>1週目</th><th>2週目</th><th>3週目</th><th>4週目</th><th>5週目</th><th>2ヶ月目〜</th><th>中間の見直し</th><th>卒業</th></tr></thead>
             <tbody>
-              <tr><td>タスク管理</td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td></tr>
-              <tr><td>目標設定</td><td class="on"></td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td></tr>
-              <tr><td>コンセプトワーク設計</td><td></td><td></td><td class="on"></td><td class="on"></td><td></td><td></td><td></td></tr>
-              <tr><td>振り返り</td><td></td><td></td><td></td><td></td><td class="lbl">毎月</td><td class="on"></td><td class="on"></td></tr>
-              <tr><td>台本添削</td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td><td></td></tr>
+              <tr><td>タスク管理</td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td><td class="on k"></td></tr>
+              <tr><td>目標設定</td><td class="on"></td><td class="on"></td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td></tr>
+              <tr><td>コンセプトワーク設計</td><td></td><td></td><td class="on"></td><td class="on"></td><td class="on"></td><td></td><td></td><td></td></tr>
+              <tr><td>振り返り</td><td></td><td></td><td></td><td></td><td class="on"></td><td class="lbl">毎月</td><td class="on"></td><td class="on"></td></tr>
+              <tr><td>台本添削</td><td></td><td></td><td></td><td></td><td></td><td class="on"></td><td class="on"></td><td></td></tr>
             </tbody>
           </table>
           </div>
-          <p class="fig-n">濃い色のタスク管理シートは、毎週の個別ミーティングで講師が必ず書きます。台本添削シートは、投稿を始める2ヶ月目からを目安にしています。<span class="tag tbd" style="margin-left:2px">要確認</span></p>
+          <p class="fig-n">濃い色のタスク管理シートは、毎週の個別ミーティングで講師が必ず書きます。振り返りシートは4週目に宿題にして、5週目に一緒に見ます。台本添削シートは、投稿を始める2ヶ月目からを目安にしています。<span class="tag tbd" style="margin-left:2px">要確認</span></p>
         </figure>
       </section>
 
       <section class="ch" id="ch11">
-        <div class="ch-head"><span class="no">CHAPTER 11</span><h3>チャットと添削</h3><p class="sum">添削はLINEで届きます。台本は台本添削シートに書いてもらいます（第10章）。どちらも24時間以内に、次の型で返します。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 10</span><h3>チャットと添削</h3><p class="sum">添削はLINEで届きます。台本は台本添削シートに書いてもらいます（第9章）。どちらも24時間以内に、次の型で返します。</p></div>
         <div class="recipe">
           <ol>
             <li><span class="rn en">1</span><div><h4>出したことへの一言</h4><p>「提出ありがとうございます！忙しい中でよく作りましたね」</p></div></li>
@@ -926,7 +1000,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       </section>
 
       <section class="ch" id="ch12">
-        <div class="ch-head"><span class="no">CHAPTER 12</span><h3>グルコン</h3><p class="sum">月4回のグループコンサルです。進行は講師責任者が行います。講師の役割は、担当の受講生さんにできるだけ参加してもらうことです。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 11</span><h3>グルコン</h3><p class="sum">月4回のグループコンサルです。進行は講師責任者が行います。講師の役割は、担当の受講生さんにできるだけ参加してもらうことです。</p></div>
         <div class="gc">
           <div><span class="c en">2<small>回 / 月</small></span><h4>作業会</h4><p>みんなで集まって作業する。一人だと手が止まる人に勧める。</p></div>
           <div><span class="c en">1<small>回 / 月</small></span><h4>スレッズのシェア会</h4><p>スレッズの投稿をシェアし合う。</p></div>
@@ -940,7 +1014,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       </section>
 
       <section class="ch" id="ch13">
-        <div class="ch-head"><span class="no">CHAPTER 13</span><h3>気づいて声をかける</h3><p class="sum">「悩んでいるな」と気づいて声をかけることを、全員が同じようにできるように、見るべきサインとかける言葉を決めておきます。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 12</span><h3>気づいて声をかける</h3><p class="sum">「悩んでいるな」と気づいて声をかけることを、全員が同じようにできるように、見るべきサインとかける言葉を決めておきます。</p></div>
         <div class="signs">
           <div class="sign"><h4>返信が遅くなった・既読がつかない</h4><p>「最近どうですか？忙しい時期なら、今週はこれだけやれば大丈夫です」</p></div>
           <div class="sign"><h4>タスクが2週続けて終わっていない</h4><p>「今、何か止まっていることはありますか？一緒に分けて考えましょう」</p></div>
@@ -974,11 +1048,305 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
         </div>
       </section>
 
-      <!-- ===================== PART 4 ===================== -->
-      <div class="part-head"><span class="pl">PART 4</span><h2>チーム編</h2><p>講師同士で品質をそろえ、マニュアルを育てていくための決まりです。</p></div>
+      <!-- ===================== PART 4 最初の5週間 ===================== -->
+      <div class="part-head"><span class="pl">PART 4</span><h2>最初の5週間</h2><p>受講生さんのアカウントの土台をつくる5週間です。新しい講師でも迷わず進められるように、週ごとのゴール・40分の流れ・課題を決めています。</p></div>
+
+      <section class="ch" id="w0">
+        <div class="ch-head"><span class="no">OVERVIEW</span><h3>5週間の全体像と共通のルール</h3><p class="sum">1週目〜4週目で1ヶ月目、5週目は2ヶ月目のはじめです。毎週、資料（スライド）を画面共有しながら、同じ型で進めます。</p></div>
+        <nav class="wkmap" aria-label="週ごとのページ">
+          <a href="#ch8"><span class="w">WEEK 1</span><b>初回ミーティング</b><small>目標設定シート・自己紹介動画</small></a>
+          <a href="#wk2"><span class="w">WEEK 2</span><b>動画作成の練習</b><small>丸ごと真似した動画を1本</small></a>
+          <a href="#wk3"><span class="w">WEEK 3</span><b>競合リサーチ</b><small>伸びている5アカウント</small></a>
+          <a href="#wk4"><span class="w">WEEK 4</span><b>コンセプト設計（前半）</b><small>棚卸し〜ペルソナの悩み</small></a>
+          <a href="#wk5" class="last"><span class="w">WEEK 5</span><b>コンセプトとアカウント構築</b><small>2ヶ月目のはじめ</small></a>
+        </nav>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：2〜5週目の40分は、この型で進める</figcaption>
+          <div class="mtg">
+            <div><span class="m">10<small>分</small></span><span class="t">① 課題のフィードバック</span><span class="d">前の週の課題を返す</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">② 今の進捗</span><span class="d">「今の進捗はどうですか？」</span></div>
+            <div class="main"><span class="m">20<small>分</small></span><span class="t">③ 次の課題の説明</span><span class="d">資料を見せながら、その週のテーマを説明する</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">④ 次のタスクを書く</span><span class="d">タスク管理シートに講師が書く</span></div>
+          </div>
+          <p class="fig-n">2週目だけは②の代わりに「目標設定シートの確認（5分）」を入れ、進捗は①の中で聞きます。</p>
+        </figure>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>1〜5週目は、毎回資料（スライド）を画面共有しながら進める。<span class="tag must">必須</span><span class="tag tbd">2〜5週目の資料は準備中</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>2〜5週目の40分は、上の図の型（フィードバック10分→進捗5分→説明20分→タスク5分）で進める。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>進捗は「今の悩みは？」ではなく、<b>「今の進捗はどうですか？」</b>と聞く。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>課題の期限は、次のミーティングまで。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>課題が終わっていなくても、<b>次の週の内容は予定どおり始め</b>、持ち越した課題と並行して進める。5週間で土台をつくりきるため。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>持ち越しは講師が対応する（講師責任者に上げなくてよい）。できるように、講師から声をかけて誘導する。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="ch8">
+        <div class="ch-head"><span class="no wkno">WEEK 1</span><h3>初回ミーティング</h3><p class="sum">ゴールは、受講生さんが「この選択でよかった」「ワクワクする」と感じて終わること。1対1・約30分で、初回ミーティング資料を画面共有しながら、資料どおりに進めます。</p></div>
+        <a class="linkbtn" href="https://canva.link/2vjhz68akuf5qnl" target="_blank" rel="noopener"><span class="ic" aria-hidden="true">▶</span><span class="tx"><span class="t">初回ミーティング資料（Canva）を開く</span><span class="d">Canvaのテンプレートです。開くと自分用のコピーが作られます<br><b>※ 必ず自分用にコピーしてから書きかえてください。</b></span></span><span class="go">開く ↗</span></a>
+        <div class="bracket">
+          <div class="box"><span class="lb">BEFORE</span><h4>事前の準備</h4><ul><li>受講生さんを振り分けるときに、セールスマンから事前情報が届く。<b>必ず読み込んでおく</b></li><li>Canvaの初回ミーティング資料をコピーし、<b>表紙に受講生さんの名前</b>を入れる</li><li>「講師紹介」（7ページ）と「講師の自己紹介」（9ページ）を自分の内容に書き換え、写真を入れる</li><li>20ページの【半年／1年】を、受講生さんのコースに合わせる</li><li>なぜHASH HACKで講師をしているかを、1分で話せるようにしておく</li><li>5つのシートのスプレッドシートを、受講生さんの名前を入れて用意しておく</li></ul></div>
+          <div class="box"><span class="lb">AFTER</span><h4>終わったあと</h4><ul><li>当日中にお礼を送り、課題の内容と期限を文字でもう一度伝える</li><li>聞いたこと（始めた理由、使える時間、不安なこと）を記録する</li><li>気になる点があれば講師責任者に共有する</li></ul></div>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>順番</th><th>内容</th><th>必ず伝えること</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>はじめに・理念・3つの約束</td><td>3つの約束を、講師自身の言葉で伝える</td></tr>
+              <tr><td>2</td><td>講師の自己紹介・受講生さんの自己紹介</td><td>講師から先に話す。受講生さんの「なぜ始めたか」を本人の口から聞く</td></tr>
+              <tr><td>3</td><td>サポートの説明</td><td>チャット・添削・グルコン・個別ミーティングの使い方と、1年の流れ</td></tr>
+              <tr><td>4</td><td>ワークと課題</td><td>目標設定シートと自己紹介動画（CapCut・20秒〜1分、完成したらLINEで送る）の目的と期限</td></tr>
+              <tr><td>5</td><td>最後に</td><td>「何かあったらいつでも連絡してね」と伝え、次にやることを確認する</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>初回ミーティングは、初回ミーティング資料に沿って行う。資料の中身を講師が変えない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>資料は<a href="https://canva.link/2vjhz68akuf5qnl" target="_blank" rel="noopener">Canvaのテンプレート</a>から自分用にコピーして使う。書きかえるのは、表紙の受講生さんの名前、講師紹介（7ページ）、講師の自己紹介（9ページ）、受講期間（20ページ）だけ。元のテンプレートは書きかえない。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="wk2">
+        <div class="ch-head"><span class="no wkno">WEEK 2</span><h3>動画作成の練習（丸ごと真似）</h3><p class="sum">上手な人のリールを1本、丸ごと真似して作る練習です。上手な人がどれだけのカット数を使い、どんなテンポで、どこにテロップを出しているのかを、手を動かして理解します。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">GOAL</span><h4>この週のゴール</h4><p>お手本を決めて、丸ごと真似した動画を作り始められる。編集に慣れる。</p></div>
+          <div class="box"><span class="lb">NEXT</span><h4>3週目に進む条件</h4><p><b>丸ごと真似した動画が1本完成している</b>こと。終わらなければ次回まで持ち越し、3週目は予定どおり始める。</p></div>
+        </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：2週目の40分</figcaption>
+          <div class="mtg">
+            <div><span class="m">10<small>分</small></span><span class="t">① 自己紹介動画のフィードバック</span><span class="d">進捗もここで聞く</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">② 目標設定シート</span><span class="d">画面共有して確認</span></div>
+            <div class="main"><span class="m">20<small>分</small></span><span class="t">③ 丸ごと真似の課題の説明</span><span class="d">お手本の探し方・CapCutのコツ</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">④ 次のタスクを書く</span><span class="d">タスク管理シート</span></div>
+          </div>
+        </figure>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>1週目の課題</th><th>見るところ・聞くこと</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">自己紹介動画</td><td>見る：テロップの長さ、動画と動画の切り替え<br>聞く：作るのにかかった時間、つまずいたところ</td></tr>
+              <tr><td class="okw">目標設定シート</td><td>講師とのすり合わせ：苦手なこと、講師に求めていること → どんなサポートができるかを提案する<br>話す：これまでの生活、強み、講師との共通点</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>課題</th><th>丸ごと真似した動画</th></tr></thead>
+            <tbody>
+              <tr><td>お手本を選ぶ人</td><td>受講生さん</td></tr>
+              <tr><td>お手本の条件</td><td>自分と似たジャンル／<b>再生1万回以上</b>／Instagramのリール、またはTikTok</td></tr>
+              <tr><td>真似するところ</td><td><b>全部</b>：構成、テロップ、カットの切り替え、音楽、長さ、照明や明るさ。商品を紹介する動画なら、商品は違ってよい</td></tr>
+              <tr><td>撮影</td><td>受講生さんが自分で撮る。お手本が顔を出しているなら、顔を出して撮るほうがよい</td></tr>
+              <tr><td>本数・期限</td><td>1本／3週目のミーティングまで</td></tr>
+              <tr><td>提出</td><td>LINEで送る</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：お手本の探し方（ミーティングの中で教える）</figcaption>
+          <div class="flow f3">
+            <div class="st"><span class="who">① 探す</span><span class="what">ハッシュタグやキーワードで検索する／発見タブを見る／同じジャンルの人を選び、アカウントを1つずつ見る</span></div>
+            <div class="st"><span class="who">② 再生数を見る</span><span class="what">リールの下にある数字を見る。<b>1万回以上</b>のものを選ぶ</span></div>
+            <div class="st hl"><span class="who">③ 残す</span><span class="what">保存する。または、リンクを保存しておく</span></div>
+          </div>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：CapCutの基本の流れ</figcaption>
+          <ol class="cc">
+            <li><span class="n">1</span><b>素材を読み込む</b><small>撮った動画を新しいプロジェクトに入れる</small></li>
+            <li><span class="n">2</span><b>カットする</b><small>いらないところを分割して削除する</small></li>
+            <li class="key"><span class="n">3</span><b>テロップを入れる</b><small>背景つき・動きつきなど、いろいろ選べる。<b>1つ作ったら複製して使う</b></small></li>
+            <li><span class="n">4</span><b>切り替えを入れる</b><small>動画と動画のつなぎ目に入れる</small></li>
+            <li><span class="n">5</span><b>長さを調整する</b><small>お手本と同じ長さ・テンポに合わせる</small></li>
+            <li><span class="n">6</span><b>書き出す</b><small>完成した動画を保存して、LINEで送る</small></li>
+            <li class="opt"><span class="n">任意</span><b>音楽</b><small>CapCutで入れなくてよい</small></li>
+            <li class="opt"><span class="n">任意</span><b>有料版</b><small>素材が豊富になる。課金するかは本人が決める</small></li>
+          </ol>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：テロップは「複製」して使う</figcaption>
+          <div class="clips">
+            <div class="row"><span>複製して使う<small>サイズと高さがそろう</small></span><div class="cl"><div class="c"><i></i></div><div class="c"><i></i></div><div class="c"><i></i></div><div class="c"><i></i></div></div></div>
+            <div class="row bad"><span>毎回新しく入れる<small>サイズも高さもバラバラ</small></span><div class="cl"><div class="c"><i></i></div><div class="c"><i></i></div><div class="c"><i></i></div><div class="c"><i></i></div></div></div>
+          </div>
+          <p class="fig-n">1つ目のテロップの書体・大きさ・位置を整えたら、それを複製して文字だけ書きかえます。</p>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：テロップは真ん中に置く</figcaption>
+          <div class="phones">
+            <div class="pf"><div class="phone top"><span class="cap">テロップ</span></div><span class="lb"><i class="x">×</i>上に置く</span><small>素材を見せたくて、上に置く人が多い。視線が上下に動いてしまう</small></div>
+            <div class="pf"><div class="phone mid"><span class="cap">テロップ</span></div><span class="lb"><i class="o">○</i>真ん中に置く</span><small>素材が少し見にくくても真ん中に。視線がぶれず、最後まで見てもらいやすい</small></div>
+          </div>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：テンポを上げる「ジェットカット」</figcaption>
+          <div class="jet">
+            <div class="row"><span>カット前</span><div class="bar"><i class="v" style="flex:3"></i><i class="q" style="flex:1.4"></i><i class="v" style="flex:2"></i><i class="q" style="flex:1.8"></i><i class="v" style="flex:2.6"></i><i class="q" style="flex:1.2"></i><i class="v" style="flex:2"></i></div></div>
+            <div class="row"><span>カット後</span><div class="bar" style="width:66%"><i class="v" style="flex:3"></i><i class="v" style="flex:2;border-left:2px solid var(--bg)"></i><i class="v" style="flex:2.6;border-left:2px solid var(--bg)"></i><i class="v" style="flex:2;border-left:2px solid var(--bg)"></i></div></div>
+            <div class="leg"><span><i style="background:var(--pink)"></i>話している・動いているところ</span><span><i style="background:var(--surface);border:1px solid var(--line)"></i>無音・間（あいだ）</span></div>
+          </div>
+          <p class="fig-n">無音や間をできるだけ切ると、テンポが上がります。メリハリをつけたいときは、速度を少し上げる、キーフレームを使う、も伝えます。</p>
+        </figure>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>よくあるつまずき</th><th>アドバイス</th></tr></thead>
+            <tbody>
+              <tr><td class="okw">見たままを再現できない</td><td>画質を上げるだけで質がかなり上がる。撮影アプリ（Foodie、BeautyCam）をすすめる</td></tr>
+              <tr><td class="okw">テロップを上に置いてしまう</td><td>素材が多少見にくくても、真ん中に置く</td></tr>
+              <tr><td class="okw">テンポが遅い</td><td>無音の部分をなくす（ジェットカット）</td></tr>
+              <tr><td class="okw">メリハリがない</td><td>速度を少し上げる。キーフレームを使う</td></tr>
+              <tr><td class="okw">暗い・見にくい</td><td>照明や明るさも、お手本の動画を見て真似する</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>1週目の課題は、2週目のミーティングで「どうでしたか？」から返す。2週目まで日が空くときは、LINEで返す。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>目標設定シートは画面共有して一緒に見る。資料とシートを行き来してよい。<span class="tag rec">推奨</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>お手本の探し方は、ミーティングの中で実際に見せながら教える。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>テロップは複製して使うこと、真ん中に置くことを必ず伝える。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>音楽とCapCutの有料版は任意。講師から無理にすすめない。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="wk3">
+        <div class="ch-head"><span class="no wkno">WEEK 3</span><h3>競合リサーチ</h3><p class="sum">同じジャンルで伸びている人を5アカウント調べ、なぜ伸びているのかを言葉にします。はじめに、2週目の動画にフィードバックします。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">GOAL</span><h4>この週のゴール</h4><p>リサーチの見るところと書き方が分かり、5アカウントを調べ始められる。</p></div>
+          <div class="box"><span class="lb">NEXT</span><h4>4週目に進む条件</h4><ul><li>5アカウントのリサーチが終わっている</li><li><b>なぜ伸びているのか</b>を、自分の言葉で言える</li><li>そのアカウントのいいところと、自分に取り入れたいところがはっきり分かっている</li></ul></div>
+        </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：3週目の40分</figcaption>
+          <div class="mtg">
+            <div><span class="m">10<small>分</small></span><span class="t">① 丸ごと真似した動画のフィードバック</span><span class="d">下の順番で返す</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">② 今の進捗</span><span class="d">「今の進捗はどうですか？」</span></div>
+            <div class="main"><span class="m">20<small>分</small></span><span class="t">③ 競合リサーチの説明</span><span class="d">1アカウントは一緒に調べて見せる</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">④ 次のタスクを書く</span><span class="d">タスク管理シート</span></div>
+          </div>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：丸ごと真似した動画の返し方</figcaption>
+          <div class="flow">
+            <div class="st hl"><span class="who">① ねぎらう</span><span class="what">「撮影と編集、お疲れさまでした」</span></div>
+            <div class="st"><span class="who">② 聞く</span><span class="what">大変だったところ、作るのにかかった時間</span></div>
+            <div class="st"><span class="who">③ 確認する</span><span class="what">再現できているか／画質／テロップの位置／テンポ／メリハリ／明るさ</span></div>
+            <div class="st hl"><span class="who">④ 目的を伝える</span><span class="what">何のための練習だったのか</span></div>
+          </div>
+          <div class="ex"><span class="lb">④の伝え方の例</span><p>「この練習は、上手な人がどれだけのカット数を使って、どんなテンポで、どこにテロップを出しているのかを、手を動かして分かってもらうためのものでした。」</p></div>
+        </figure>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>課題</th><th>競合リサーチ</th></tr></thead>
+            <tbody>
+              <tr><td>数</td><td>5アカウント</td></tr>
+              <tr><td>選び方</td><td>同じジャンル／フォロワー5,000人以上／<b>直近で伸びている人</b>（始めて間もないのに、もう数千人ついている など）</td></tr>
+              <tr><td>始めた時期の見方</td><td>プロフィールの「このアカウントについて」から見る</td></tr>
+              <tr><td>見るところ</td><td>プロフィールのコンセプト、伸びている投稿、投稿の頻度、世界観</td></tr>
+              <tr><td>書く場所</td><td>進捗管理シートの「コンセプト設計ワーク」の中のリサーチ欄 <span class="tag tbd">シートは作り変え中</span></td></tr>
+              <tr><td>書く項目</td><td>名前、URL、フォロワー数、最近9投稿の平均再生回数、系統、<b>なぜ伸びているかの考察</b>、投稿事例のURL（3つ）</td></tr>
+              <tr><td>期限</td><td>4週目のミーティングまで</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>動画のフィードバックは、まずねぎらってから始める。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>丸ごと真似した練習の目的を、必ず言葉にして伝える。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>リサーチは、ミーティングの中で1アカウントだけ一緒に調べて見せる。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>「なぜ伸びているのか」の考察は、受講生さん本人の言葉で書いてもらう。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>動画が完成していなくても、リサーチは予定どおり始めて並行して進める。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="wk4">
+        <div class="ch-head"><span class="no wkno">WEEK 4</span><h3>コンセプト設計 実践ワーク（前半）</h3><p class="sum">自分の棚卸しから、ペルソナの悩みの深掘りまでを宿題にします。ミーティングでは一緒に書かず、書き方を説明して宿題にします。1ヶ月目の最後の週です。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">GOAL</span><h4>この週のゴール</h4><p>コンセプト設計ワークの書き方が分かり、一人で書き進められる。</p></div>
+          <div class="box"><span class="lb">NEXT</span><h4>5週目に進む条件</h4><p><b>ペルソナの悩みの深掘りまで</b>できている。</p></div>
+        </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：4週目の40分</figcaption>
+          <div class="mtg">
+            <div><span class="m">10<small>分</small></span><span class="t">① 競合リサーチのフィードバック</span><span class="d">考察と、取り入れたいところ</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">② 今の進捗</span><span class="d">「今の進捗はどうですか？」</span></div>
+            <div class="main"><span class="m">20<small>分</small></span><span class="t">③ コンセプト設計ワークの説明</span><span class="d">書き方を口頭で説明して宿題に</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">④ 次のタスクを書く</span><span class="d">振り返りシートも宿題に</span></div>
+          </div>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：4週目の宿題（この順番で書く）</figcaption>
+          <ol class="chain">
+            <li class="s"><span>自分の棚卸し</span></li>
+            <li class="s"><span>他己分析</span></li>
+            <li class="s"><span>弱みの変換</span></li>
+            <li><span>なぜあなたが語れるのか（実績・クチコミ・経験）</span></li>
+            <li><span>ペルソナ</span></li>
+            <li><span>ターゲット</span></li>
+            <li><span>ペルソナの深掘り</span></li>
+            <li><span>コンセプトのスタート（悩みを書く）</span></li>
+            <li class="g"><span>特に深い悩みは？</span></li>
+          </ol>
+          <p class="skip">使わないブロック：<s>心が動いた商品</s>／<s>ポジショニングマップ</s>／<s>3つの行動からニーズを読み取る</s></p>
+        </figure>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>競合リサーチのフィードバック</th><th>確認すること</th></tr></thead>
+            <tbody>
+              <tr><td>考察</td><td>なぜ伸びているのかが、自分の言葉で書けているか</td></tr>
+              <tr><td>取り入れたいところ</td><td>そのアカウントのいいところと、自分に取り入れたいところがはっきりしているか</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>コンセプト設計ワークは、ミーティングの中で一緒に書かない。書き方を説明して宿題にする。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>講座の動画は渡していないので、各ブロックの書き方は講師が口頭で説明する。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>「心が動いた商品」「ポジショニングマップ」「3つの行動」は使わない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第4条</span><div class="ab"><p>1ヶ月目の終わりなので、振り返りシートを宿題に出す。5週目のミーティングで一緒に見る。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第5条</span><div class="ab"><p>リサーチが終わっていなくても、コンセプト設計ワークは予定どおり始めて並行して進める。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <section class="ch" id="wk5">
+        <div class="ch-head"><span class="no wkno">WEEK 5</span><h3>コンセプトとアカウント構築</h3><p class="sum">2ヶ月目のはじめです。コンセプトを一文にまとめ、アカウントを形にします。ここで土台ができあがり、投稿を始められます。</p></div>
+        <div class="bracket">
+          <div class="box"><span class="lb">GOAL</span><h4>この週のゴール</h4><p>1ヶ月目の進み具合を実感し、安心して次に進める。コンセプトとアカウント構築の書き方が分かる。</p></div>
+          <div class="box"><span class="lb">NEXT</span><h4>投稿を始める条件</h4><p><b>アカウント構築ができている</b>こと。</p></div>
+        </div>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：5週目の40分</figcaption>
+          <div class="mtg">
+            <div><span class="m">10<small>分</small></span><span class="t">① コンセプト設計ワーク（前半）のフィードバック</span><span class="d">ペルソナの悩みの深掘りまで</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">② 振り返りシートを一緒に見る</span><span class="d">今の進捗として</span></div>
+            <div class="main"><span class="m">20<small>分</small></span><span class="t">③ コンセプトとアカウント構築の説明</span><span class="d">書き方を説明して宿題に</span></div>
+            <div><span class="m">5<small>分</small></span><span class="t">④ 次のタスクを書く</span><span class="d">タスク管理シート</span></div>
+          </div>
+          <p class="fig-n">振り返りシートを②の時間で見るのは、Claudeの提案です。<span class="tag tbd" style="margin-left:2px">要確認</span></p>
+        </figure>
+        <figure class="fig" style="margin:0">
+          <figcaption class="fig-t">図：5週目の宿題（この順番で書く）</figcaption>
+          <ol class="chain">
+            <li><span>最終ゴール（LF8のどの欲求に向けて発信するか）</span></li>
+            <li><span>ビジネス・商品・企画コンセプトのスタートとゴール</span></li>
+            <li><span>ゴールへ導く手段</span></li>
+            <li><span>コンセプトを一文にまとめる</span></li>
+            <li class="g"><span>アカウント構築</span></li>
+          </ol>
+          <p class="fig-n">アカウント構築で決めること：名前、肩書き、実績（メリット）、アイコン、プロフィール文、投稿デザイン、リンク先。「アカウント案」のタブは使いません。</p>
+        </figure>
+        <div class="cheer">
+          <span class="lb">振り返りシートを見ながら、必ず伝えること</span>
+          <p>アカウント設計は、この土台が一番大事です。ここが崩れると、発信も迷いながら進めることになります。進んでいないように感じるかもしれませんが、実はとてもしっかり進んでいます。安心して、このまま進めていきましょう。</p>
+        </div>
+        <div class="arts">
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>振り返りシートを一緒に見て、「ここまで進んでいる」という実感を持ってもらう。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第2条</span><div class="ab"><p>上の言葉で、受講生さんの背中を押す。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第3条</span><div class="ab"><p>アカウント構築ができたら、投稿を始める（2ヶ月目）。それまでは、残りのコンセプト設計ワークを個別ミーティングで進める。<span class="tag must">必須</span></p></div></div>
+        </div>
+      </section>
+
+      <!-- ===================== PART 5 ===================== -->
+      <div class="part-head"><span class="pl">PART 5</span><h2>チーム編</h2><p>講師同士で品質をそろえ、マニュアルを育てていくための決まりです。</p></div>
 
       <section class="ch" id="ch14">
-        <div class="ch-head"><span class="no">CHAPTER 14</span><h3>講師定例とルールの決め直し</h3><p class="sum">このマニュアルの基準は、講師責任者のやり方です。もっとよい方法が見つかったら、講師定例で話し合って決め直します。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 13</span><h3>講師定例とルールの決め直し</h3><p class="sum">このマニュアルの基準は、講師責任者のやり方です。もっとよい方法が見つかったら、講師定例で話し合って決め直します。</p></div>
         <div class="bracket">
           <div class="box"><span class="lb">EVERY WEEK</span><h4>講師定例で話すこと</h4><ul><li>キャンセル率（クーリングオフのキャンセル率。欠席の割合ではない）</li><li>担当の受講生さんの状況</li><li>対応に迷った場面と、その対応</li><li>3つの約束に沿ったよい対応の共有</li></ul></div>
           <div class="box"><span class="lb">UPDATE</span><h4>ルールを変えるとき</h4><ul><li>講師が変えたほうがよいと思ったら、講師定例で提案する</li><li>講師同士で話し合い、講師責任者が決める</li><li>決まったことは、このマニュアルに書き足す</li><li>マニュアルが変わるまでは、今のルールで動く</li></ul></div>
@@ -990,11 +1358,11 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       </section>
 
       <section class="ch" id="ch15">
-        <div class="ch-head"><span class="no">CHAPTER 15</span><h3>新しい講師の最初の1週間</h3><p class="sum">マニュアルを読み、初回ミーティングを1回見学し、流れを説明できるようになったら担当を持てます。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 14</span><h3>新しい講師の最初の1週間</h3><p class="sum">マニュアルを読み、初回ミーティングを1回見学し、流れを説明できるようになったら担当を持てます。</p></div>
         <div class="days">
-          <div class="day"><span class="dn">STEP 1</span><h4>マニュアルを熟読する</h4><p>第1章から付録まで全部。特に第3章・第4章・第7章。</p></div>
+          <div class="day"><span class="dn">STEP 1</span><h4>マニュアルを熟読する</h4><p>第1章から付録まで全部。特に第3章・第4章・第7章と「最初の5週間」。</p></div>
           <div class="day"><span class="dn">STEP 2</span><h4>初回ミーティングを見学する</h4><p>講師責任者の初回ミーティングを1回見学する。</p></div>
-          <div class="day"><span class="dn">STEP 3</span><h4>流れを説明できるようにする</h4><p>初回ミーティングの流れと、最初の4週の流れを自分の言葉で話せる。</p></div>
+          <div class="day"><span class="dn">STEP 3</span><h4>流れを説明できるようにする</h4><p>最初の5週間の流れを、自分の言葉で話せる。</p></div>
           <div class="day goal"><span class="dn">GOAL</span><h4>担当を持つ</h4><p>下のチェックがすべて埋まったら、講師責任者と確認して担当開始。</p></div>
         </div>
         <div class="checks" data-key="hh-onboard">
@@ -1004,7 +1372,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <label><input type="checkbox" id="ob3"><span>返信6時間・添削24時間・夜と休日は翌朝から、を覚えた</span></label>
           <label><input type="checkbox" id="ob4"><span>初回ミーティングを1回見学した</span></label>
           <label><input type="checkbox" id="ob5"><span>Canvaの初回ミーティング資料をコピーし、「講師紹介」と「講師の自己紹介」を自分の内容にした</span></label>
-          <label><input type="checkbox" id="ob6"><span>最初の4週の流れ（初回ミーティング→動画の練習→競合リサーチ→コンセプトワーク）を説明できる</span></label>
+          <label><input type="checkbox" id="ob6"><span>最初の5週間の流れ（初回ミーティング→動画の練習→競合リサーチ→コンセプト設計→アカウント構築）を説明できる</span></label>
           <label><input type="checkbox" id="ob7"><span>週1回の個別ミーティングの4つの順番を説明できる</span></label>
           <label><input type="checkbox" id="ob8"><span>すぐ報告することと、報告先を知っている</span></label>
         </div>
@@ -1012,7 +1380,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
       </section>
 
       <section class="ch" id="leave">
-        <div class="ch-head"><span class="no">CHAPTER 16</span><h3>講師を辞めるとき</h3><p class="sum">途中で辞めるときも、最後まで責任を持って引き継ぎます。受講生さんが不安なく、新しい講師と向き合えるようにするためです。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 15</span><h3>講師を辞めるとき</h3><p class="sum">途中で辞めるときも、最後まで責任を持って引き継ぎます。受講生さんが不安なく、新しい講師と向き合えるようにするためです。</p></div>
         <div class="months">
           <div class="mo key"><span class="when">1ヶ月前まで<small>辞める講師</small></span><span class="what">講師責任者の個人LINEに、辞めることを伝える。<span class="nt">最終日は、できる限り月末にする。</span></span></div>
           <div class="mo"><span class="when">1〜2週間前まで<small>講師責任者</small></span><span class="what">新しい講師を決める。</span></div>
@@ -1034,17 +1402,17 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="art"><span class="an">第5条</span><div class="ab"><p>引き継ぎシートは、最終日の<b>1週間前まで</b>に出す。5つのシートと、受講生さんごとの状況メモは必ず引き継ぐ。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第6条</span><div class="ab"><p>新しい講師は、間に合えば最終日までのレッスンに立ち会う。難しければ録画を見て、受講生さんの様子をつかんでおく。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第7条</span><div class="ab"><p>新しい講師との顔合わせ（最初のレッスン）は、新しい講師だけで行う。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第8条</span><div class="ab"><p>報酬は次のとおり（第17章・第18章）。<span class="tag must">必須</span></p><ul><li>最終月のLINE返信報酬は満額</li><li><b>引き継ぎ費用</b>：引き継いだ新しい講師にも、担当費用として<b>受講生さん1人につき5,000円</b>が発生する。引き継いだ翌月に支払う</li><li>辞めたあとに受講生さんが成果を出した場合、成果ボーナスは新しい講師に支払う</li></ul></div></div>
+          <div class="art"><span class="an">第8条</span><div class="ab"><p>報酬は次のとおり（第16章・第17章）。<span class="tag must">必須</span></p><ul><li>最終月のLINE返信報酬は満額</li><li><b>引き継ぎ費用</b>：引き継いだ新しい講師にも、担当費用として<b>受講生さん1人につき5,000円</b>が発生する。引き継いだ翌月に支払う</li><li>辞めたあとに受講生さんが成果を出した場合、成果ボーナスは新しい講師に支払う</li></ul></div></div>
           <div class="art"><span class="an">第9条</span><div class="ab"><p>辞めたあとは、次のことを守る。<span class="tag must">必須</span></p><ul><li>受講生さんに個人的に連絡しない（勧誘や引き抜きを含む）</li><li>シート、録画、LINEのやり取りを持ち出さない</li><li>最終日に、受講生さんのデータへのアクセス権を返す</li></ul></div></div>
           <div class="art"><span class="an">第10条</span><div class="ab"><p>体調不良などで1ヶ月前に伝えられない場合は、講師責任者が受講生さんへの連絡と引き継ぎを代わりに行う。辞める講師は、できる範囲で引き継ぎシートだけは出す。<span class="tag must">必須</span></p></div></div>
         </div>
       </section>
 
-      <!-- ===================== PART 5 ===================== -->
-      <div class="part-head"><span class="pl">PART 5</span><h2>報酬編</h2><p>実施した分をきちんとお支払いするための決まりです。全講師で同じルールを使います。</p></div>
+      <!-- ===================== PART 6 ===================== -->
+      <div class="part-head"><span class="pl">PART 6</span><h2>報酬編</h2><p>実施した分をきちんとお支払いするための決まりです。全講師で同じルールを使います。</p></div>
 
       <section class="ch" id="ch16">
-        <div class="ch-head"><span class="no">CHAPTER 17</span><h3>報酬の項目と金額</h3><p class="sum">報酬は、この章と第18章にある項目だけです。ここにない項目は、請求する前に講師責任者へ相談してください。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 16</span><h3>報酬の項目と金額</h3><p class="sum">報酬は、この章と第17章にある項目だけです。ここにない項目は、請求する前に講師責任者へ相談してください。</p></div>
         <div class="nums">
           <div class="numc"><span class="lb">レッスン 1コマ40分</span><span class="v"><span class="en">750–2,000</span><small>円</small></span><span class="d">ランクで決まる</span></div>
           <div class="numc"><span class="lb">担当費用</span><span class="v"><span class="en">5,000</span><small>円</small></span><span class="d">受講生さん1人につき1回限り。引き継いだ講師にも発生</span></div>
@@ -1059,7 +1427,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
               <tr><td class="okw">LINE返信</td><td>5,000円</td><td>講師1人につき毎月</td></tr>
               <tr><td class="okw">正月ボーナス</td><td>レッスン単価の2倍</td><td>1月1日〜3日に実施したレッスン</td></tr>
               <tr><td class="okw">作業会・シェア会・セミナー</td><td>担当者に個別に案内</td><td>担当者1人、1回ごと</td></tr>
-              <tr><td class="okw">成果ボーナス</td><td>2,000〜5,000円</td><td>達成ごと（第18章）</td></tr>
+              <tr><td class="okw">成果ボーナス</td><td>2,000〜5,000円</td><td>達成ごと（第17章）</td></tr>
             </tbody>
           </table>
         </div>
@@ -1087,18 +1455,18 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           </table>
         </div>
         <div class="arts">
-          <div class="art"><span class="an">第1条</span><div class="ab"><p>レッスンは<b>1コマ40分</b>。予定は1時間枠で組み、残りの15〜20分は録画の格納などの作業に使う（第9章 第5条）。できる限り40分で1コマを終わらせるように努める。40分を超えても1コマとして請求する。延長分の追加請求はできない。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第1条</span><div class="ab"><p>レッスンは<b>1コマ40分</b>。予定は1時間枠で組み、残りの15〜20分は録画の格納などの作業に使う（第8章 第5条）。できる限り40分で1コマを終わらせるように努める。40分を超えても1コマとして請求する。延長分の追加請求はできない。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第2条</span><div class="ab"><p>レッスンは必ず録画し、<b>終わり次第すぐに格納する</b>。<b>録画が格納されていることを確認できたレッスン1件ごとに</b>、1コマ分の報酬を支払う。録画が確認できないレッスンは支払いの対象外。<span class="tag must">必須</span><span class="tag tbd">要確認：録画の格納先と確認のしかた</span></p></div></div>
           <div class="art"><span class="an">第3条</span><div class="ab"><p>レッスンは週1回が基準。2週に1回にするのは、受講生さんが希望し、講師責任者が承認した場合だけ。理由をシートに残す。<span class="tag tbd">要確認</span></p></div></div>
           <div class="art"><span class="an">第4条</span><div class="ab"><p>支払いの対象は、実施したレッスンだけ。実施しなかった回と、受講生さんの都合でキャンセルになった回は対象外（第4章 第7条）。<span class="tag must">必須</span></p><p>だからこそ、キャンセルにならない工夫を<b>講師自身が考えて実行する</b>。当日朝のリマインド（第4章 第6条）に加えて、受講生さんに合った声かけを続ける。<span class="tag must">必須</span></p><p class="nt">工夫の例：日程を決めるときに受講生さんの予定を一緒に確認する／都合が悪くなったら早めに連絡してもらうよう伝えておく／レッスンで何をするかを前もって伝え、参加したくなる理由をつくる。</p></div></div>
           <div class="art"><span class="an">第5条</span><div class="ab"><p>講師定例は報酬の対象外。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第6条</span><div class="ab"><p>担当費用は、受講生さん1人につき1回だけ請求する。<span class="tag must">必須</span><span class="tag tbd">要確認：支払う時期、クーリングオフ・途中解約の場合の扱い</span></p><p class="nt">講師が辞めて担当が代わった場合は、引き継いだ新しい講師にも担当費用（引き継ぎ費用）として受講生さん1人につき5,000円を、引き継いだ翌月に支払う（第16章 第8条）。</p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>担当費用は、受講生さん1人につき1回だけ請求する。<span class="tag must">必須</span><span class="tag tbd">要確認：支払う時期、クーリングオフ・途中解約の場合の扱い</span></p><p class="nt">講師が辞めて担当が代わった場合は、引き継いだ新しい講師にも担当費用（引き継ぎ費用）として受講生さん1人につき5,000円を、引き継いだ翌月に支払う（第15章 第8条）。</p></div></div>
           <div class="art"><span class="an">第7条</span><div class="ab"><p>ランクは3ヶ月に1回査定する。上の目安に加えて、返信（6時間以内）、講師定例への参加、タスク管理シートの記入を確認する。<span class="tag tbd">要確認：確認項目</span></p></div></div>
         </div>
       </section>
 
       <section class="ch" id="ch17">
-        <div class="ch-head"><span class="no">CHAPTER 18</span><h3>成果ボーナス</h3><p class="sum">受講生さんの成果を、講師の報酬にも反映します。講師責任者が証拠を確認してから支払います。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 17</span><h3>成果ボーナス</h3><p class="sum">受講生さんの成果を、講師の報酬にも反映します。講師責任者が証拠を確認してから支払います。</p></div>
         <figure class="fig" style="margin:0">
           <figcaption class="fig-t">図：受講生さんの成果と、講師へのボーナス</figcaption>
           <div class="road">
@@ -1126,12 +1494,12 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
           <div class="art"><span class="an">第3条</span><div class="ab"><p>初売上は、受講開始後にSNS経由で1万円以上の入金が初めてあった場合。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第4条</span><div class="ab"><p>フォロワー数や入金の画面を、受講生さんの了解を得て提出する。<span class="tag must">必須</span></p></div></div>
           <div class="art"><span class="an">第5条</span><div class="ab"><p>ボーナスのために受講生さんに無理をさせない。成果や金額を約束しない（第5章）。<span class="tag must">必須</span></p></div></div>
-          <div class="art"><span class="an">第6条</span><div class="ab"><p>講師が辞めたあとに受講生さんが成果を出した場合は、新しい講師に支払う（第16章）。<span class="tag must">必須</span></p></div></div>
+          <div class="art"><span class="an">第6条</span><div class="ab"><p>講師が辞めたあとに受講生さんが成果を出した場合は、新しい講師に支払う（第15章）。<span class="tag must">必須</span></p></div></div>
         </div>
       </section>
 
       <section class="ch" id="ch18">
-        <div class="ch-head"><span class="no">CHAPTER 19</span><h3>請求書の出し方</h3><p class="sum">講師責任者の確認でOKが出てから、<b>請求書提出専用のチャットワーク</b>に提出します。レッスンは1コマずつではなく、「レッスン費用」としてまとめて書きます。</p></div>
+        <div class="ch-head"><span class="no">CHAPTER 18</span><h3>請求書の出し方</h3><p class="sum">講師責任者の確認でOKが出てから、<b>請求書提出専用のチャットワーク</b>に提出します。レッスンは1コマずつではなく、「レッスン費用」としてまとめて書きます。</p></div>
         <div class="flow">
           <div class="st"><span class="who">講師</span><span class="what">その月に実施したレッスンを講師責任者に伝える</span></div>
           <div class="st hl"><span class="who">講師責任者</span><span class="what">録画の格納を確認し、実施日とコマ数をすべて突き合わせる。問題がなければOKを出す</span></div>
@@ -1157,7 +1525,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
               <tr><td class="okw">担当費用</td><td>新しく担当した受講生さんの名前（引き継いだ場合は「引き継ぎ」と書く）</td><td>5,000円</td></tr>
               <tr><td class="okw">LINE返信</td><td>対象月</td><td>5,000円</td></tr>
               <tr><td class="okw">作業会・シェア会・セミナー</td><td>実施日</td><td>個別に案内した金額</td></tr>
-              <tr><td class="okw">成果ボーナス</td><td>受講生さんの名前、達成した項目、達成日、証拠</td><td>第18章のとおり</td></tr>
+              <tr><td class="okw">成果ボーナス</td><td>受講生さんの名前、達成した項目、達成日、証拠</td><td>第17章のとおり</td></tr>
               <tr><td class="okw">経費</td><td>承認を得た日、内容（領収書を添付）</td><td>実費</td></tr>
             </tbody>
           </table>
@@ -1213,7 +1581,7 @@ footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line);
 
       <footer>
         <span>HASH HACK 講師マニュアル　2026年11月版</span>
-        <span>内容の変更は講師定例で話し合い、講師責任者が決めます（第14章）。</span>
+        <span>内容の変更は講師定例で話し合い、講師責任者が決めます（第13章）。</span>
       </footer>
     </div>
   </main>
